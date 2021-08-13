@@ -1,0 +1,4 @@
+spring:
+  profiles:
+    active: dev # 指定profile
+    # include: pro,test 叠加profile

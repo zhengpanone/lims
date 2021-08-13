@@ -1,0 +1,33 @@
+# 服务配置
+server:
+  port: 8081
+#spring配置
+spring:
+  application: # 应用配置
+    name: sys-dev # 指定服务名
+
+  datasource: # 数据库连接池
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lims?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+  # flyway:
+  #   locations:
+  #     - classpath: db/migration
+  #   table:  t_flyway_schema_history
+  #JPA
+  jpa:
+    database: mysql
+    show-sql: true
+    open-in-view: true
+
+# swagger配置
+swagger:
+  enable: true
+  application-name: ${spring.application.name}
+  application-version: 1.0
+  application-description: springfox swagger 3.0 整合springboot 
+  try-host: http://localhost:${server.port}
+  # http://localhost:8081/swagger-ui/
+
+
