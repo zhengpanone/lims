@@ -5,8 +5,10 @@ import com.zp.module.BaseEntity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,7 +28,9 @@ import java.util.Set;
 @Table(name = "sys_user")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class User extends BaseEntity implements Serializable {
+@NoArgsConstructor
+@AllArgsConstructor
+public class User extends BaseEntity  {
     /**
      * 用户ID
      */

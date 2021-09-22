@@ -1,5 +1,6 @@
 package com.zp.domain.sys;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -7,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.zp.module.BaseEntity;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -20,8 +23,11 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "co_department")
+@EqualsAndHashCode(callSuper = false)
 @Data
-public class Department extends BaseEntity implements Serializable {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Department extends BaseEntity  {
     /**
      * ID
      */

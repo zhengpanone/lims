@@ -8,7 +8,10 @@ import javax.persistence.Table;
 
 import com.zp.module.BaseEntity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * @Author: zhengpanone
@@ -20,7 +23,10 @@ import lombok.Data;
 @Entity
 @Table(name = "sys_permission_point")
 @Data
-public class PermissionPoint extends BaseEntity implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+@AllArgsConstructor
+public class PermissionPoint extends BaseEntity  {
     @Id
     private String id;
     /**

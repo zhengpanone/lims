@@ -3,7 +3,10 @@ package com.zp.domain.sys;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zp.module.BaseEntity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +23,10 @@ import java.util.Set;
 @Entity
 @Table(name = "sys_role")
 @Data
-public class Role extends BaseEntity implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+@AllArgsConstructor
+public class Role extends BaseEntity  {
     @Id
     private String id;
     /**

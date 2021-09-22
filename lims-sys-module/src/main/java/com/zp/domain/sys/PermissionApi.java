@@ -1,5 +1,6 @@
 package com.zp.domain.sys;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -7,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.zp.module.BaseEntity;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -20,7 +23,10 @@ import java.io.Serializable;
 @Entity
 @Table(name = "sys_permission_api")
 @Data
-public class PermissionApi extends BaseEntity implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+@AllArgsConstructor
+public class PermissionApi extends BaseEntity  {
     @Id
     private String id;
     /**
