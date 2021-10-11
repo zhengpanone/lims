@@ -1,6 +1,6 @@
 package com.zp.dao;
 
-import com.zp.domain.sys.User;
+import com.zp.domain.sys.SysUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @Email zhengpanone@hotmail.com
  * @Modified By:
  */
-public interface UserDao extends JpaRepository<User, String>, JpaSpecificationExecutor<User> {
-    User findByMobile(String mobile);
+public interface UserDao extends JpaRepository<SysUser, String>, JpaSpecificationExecutor<SysUser> {
+    SysUser findByMobile(String mobile);
 }

@@ -1,18 +1,14 @@
 package com.zp.controller;
 
 import com.zp.api.sys.UserControllerApi;
-import com.zp.domain.sys.User;
+import com.zp.domain.sys.SysUser;
 import com.zp.response.ResponseResult;
 import com.zp.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import controller.BaseController;
+import javax.websocket.server.PathParam;
 
 /**
  * @author: zhengpanone
@@ -29,12 +25,19 @@ public class UserController extends BaseController implements UserControllerApi 
     @Autowired
     private UserService userService;
 
+
     @Override
     @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public ResponseResult save(@RequestBody User user) {
-        user.setCompanyId(companyId);
-        user.setCompanyName(companyName);
-        userService.save(user);
+    public ResponseResult save(@RequestBody SysUser sysUser) {
+        sysUser.setCompanyId(companyId);
+        sysUser.setCompanyName(companyName);
+        userService.save(sysUser);
+        return ResponseResult.SUCCESS();
+    }
+    @Override
+    @GetMapping("/user")
+    public ResponseResult findUserById(@PathParam("id")String id){
+        userService.findById(id);
         return ResponseResult.SUCCESS();
     }
 

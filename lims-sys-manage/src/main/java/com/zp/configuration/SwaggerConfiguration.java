@@ -1,7 +1,9 @@
 package com.zp.configuration;
 
+import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +30,8 @@ import java.util.*;
 @EnableOpenApi
 @Configuration
 public class SwaggerConfiguration implements WebMvcConfigurer {
-    private final SwaggerProperties swaggerProperties;
+    @Autowired
+    private  SwaggerProperties swaggerProperties;
 
     public SwaggerConfiguration(SwaggerProperties swaggerProperties) {
         this.swaggerProperties = swaggerProperties;
@@ -36,6 +39,7 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
 
     @Bean
     public Docket createRestApi() {
+        // swagger 设置,基本信息,要解析的接口及路径
         return new Docket(DocumentationType.OAS_30).pathMapping("/")
                 // 定义是否开启swagger,false为关闭,可以通过变量控制
                 .enable(swaggerProperties.getEnable())
@@ -44,21 +48,28 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
                 // 接口调试地址
                 .host(swaggerProperties.getTryHost())
                 // 选择哪些接口作为swagger的doc发布
-                .select().apis(RequestHandlerSelectors.any()).paths(PathSelectors.any()).build()
+                .select()
+                //设置通过什么方式定位需要自动生成文档的接口，
+                //.apis(RequestHandlerSelectors.any())
+                //这里定位方法上的@ApiOperation注解
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                //接口URI路径设置，any是全路径，也可以通过PathSelectors.regex()正则匹配
+                .paths(PathSelectors.any()).build();
                 // 支持的通讯协议集合
-                .protocols(newHashSet("https", "http")).securitySchemes(securitySchemes())
+                //.protocols(newHashSet("https", "http")).securitySchemes(securitySchemes())
                 // 授权信息全局应用
-                .securityContexts(securityContexts());
+                //.securityContexts(securityContexts());
 
     }
 
     /**
      * API 页面上半部分展示信息
-     * 
+     * 生成接口信息，包括标题、联系人，联系方式等
      * @return
      */
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title(swaggerProperties.getApplicationDescription() + "Api Doc")
+        return new ApiInfoBuilder()
+                .title(swaggerProperties.getApplicationDescription() + "Api Doc")
                 .description(swaggerProperties.getApplicationDescription())
                 .contact(new Contact("zhengpanone", null, "zhengpanone@hotmail.com"))
                 .version("Application Version" + swaggerProperties.getApplicationVersion() + ", Spring Boot Vesion"
@@ -66,29 +77,29 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
                 .build();
     }
 
-    private List<SecurityScheme> securitySchemes() {
+    /*private List<SecurityScheme> securitySchemes() {
         ApiKey apiKey = new ApiKey("BASE_TOKEN", "token", In.HEADER.toValue());
         return Collections.singletonList(apiKey);
-    }
+    }*/
 
     /**
      * 授权信息全局应用
      * 
      * @return
      */
-    private List<SecurityContext> securityContexts() {
+    /*private List<SecurityContext> securityContexts() {
         return Collections.singletonList(SecurityContext.builder().securityReferences(Collections.singletonList(
                 new SecurityReference("BASE_TOKEN", new AuthorizationScope[] { new AuthorizationScope("global", "") })))
                 .build());
-    }
+    }*/
 
-    @SafeVarargs
+    /*@SafeVarargs
     private final <T> Set<T> newHashSet(T... ts) {
         if (ts.length > 0) {
             return new LinkedHashSet<>(Arrays.asList(ts));
         }
         return null;
-    }
+    }*/
 
     /**
      * 通用拦截器排除swagger设置,所有拦截器都会自动加swagger相关资源排除信息

@@ -26,10 +26,22 @@ public class ResponseResult implements Response {
      */
     String message;
 
+    QueryResult queryResult;
+
+
     public ResponseResult(ResultCode resultCode) {
         this.success = resultCode.success();
         this.code = resultCode.code();
         this.message = resultCode.message();
+    }
+    public ResponseResult(Result result){
+        this.message = result.getMessage();
+        this.code = result.getCode();
+        this.success = result.isSuccess();
+    }
+
+    public ResponseResult(Result result ,QueryResult queryResult){
+
     }
 
     public static ResponseResult SUCCESS() {

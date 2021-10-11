@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 
 import com.zp.IdWorker;
 import com.zp.dao.UserDao;
-import com.zp.domain.sys.User;
+import com.zp.domain.sys.SysUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,33 +34,33 @@ public class UserService {
     @Autowired
     private IdWorker idWorker;
 
-    public User findByMobile(String mobile) {
+    public SysUser findByMobile(String mobile) {
         return userDao.findByMobile(mobile);
     }
 
     /**
      * 保存用户
      * 
-     * @param user
+     * @param sysUser
      */
-    public void save(User user) {
+    public void save(SysUser sysUser) {
         String id = idWorker.nextId() + "";
-        user.setPassword("123456");
-        user.setId(id);
-        userDao.save(user);
+        sysUser.setPassword("123456");
+        sysUser.setId(id);
+        userDao.save(sysUser);
     }
 
     /**
      * 根据ID更新用户
      *
-     * @param user
+     * @param sysUser
      */
-    public void update(User user) {
-        User target = userDao.findById(user.getId()).get();
-        target.setUsername(user.getUsername());
-        target.setDepartmentId(user.getDepartmentId());
-        target.setDepartmentName(user.getDepartmentName());
-        userDao.save(user);
+    public void update(SysUser sysUser) {
+        SysUser target = userDao.findById(sysUser.getId()).get();
+        target.setUsername(sysUser.getUsername());
+        target.setDepartmentId(sysUser.getDepartmentId());
+        target.setDepartmentName(sysUser.getDepartmentName());
+        userDao.save(sysUser);
     }
 
     /**
@@ -69,7 +69,7 @@ public class UserService {
      * @param id
      * @return
      */
-    public User findById(String id) {
+    public SysUser findById(String id) {
         return userDao.findById(id).get();
     }
 
@@ -77,8 +77,8 @@ public class UserService {
      * @param map
      * @return
      */
-    public Page<User> findAll(Map<String, Object> map, int page, int size) {
-        Specification<User> spec = new Specification<User>() {
+    public Page<SysUser> findAll(Map<String, Object> map, int page, int size) {
+        Specification<SysUser> spec = new Specification<SysUser>() {
             /**
              * 动态拼接查询条件
              * 
@@ -88,8 +88,8 @@ public class UserService {
              * @return
              */
             @Override
-            public Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery,
-                    CriteriaBuilder criteriaBuilder) {
+            public Predicate toPredicate(Root<SysUser> root, CriteriaQuery<?> criteriaQuery,
+                                         CriteriaBuilder criteriaBuilder) {
                 String companyId = "companyId";
                 String department = "department";
                 String hasDept = "hasDept";
@@ -109,7 +109,7 @@ public class UserService {
                 return criteriaBuilder.and(list.toArray(new Predicate[list.size()]));
             }
         };
-        Page<User> pageUser = userDao.findAll(spec, PageRequest.of(page - 1, size));
+        Page<SysUser> pageUser = userDao.findAll(spec, PageRequest.of(page - 1, size));
         return pageUser;
     }
 

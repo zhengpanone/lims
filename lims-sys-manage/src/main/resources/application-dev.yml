@@ -11,10 +11,6 @@ spring:
     url: jdbc:mysql://localhost:3306/lims?useUnicode=true&characterEncoding=utf-8
     username: root
     password: root
-  # flyway:
-  #   locations:
-  #     - classpath: db/migration
-  #   table:  t_flyway_schema_history
   #JPA
   jpa:
     database: mysql
