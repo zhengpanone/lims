@@ -3,11 +3,13 @@ package com.zp.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.validation.constraints.NotNull;
 
 import com.zp.IdWorker;
 import com.zp.dao.UserDao;
@@ -34,7 +36,8 @@ public class UserService {
     @Autowired
     private IdWorker idWorker;
 
-    public SysUser findByMobile(String mobile) {
+    public Optional<SysUser> findByMobile(String mobile) {
+
         return userDao.findByMobile(mobile);
     }
 
@@ -69,8 +72,8 @@ public class UserService {
      * @param id
      * @return
      */
-    public SysUser findById(String id) {
-        return userDao.findById(id).get();
+    public Optional<SysUser> findById(String id) {
+        return userDao.findById(id);
     }
 
     /**

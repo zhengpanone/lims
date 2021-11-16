@@ -6,3 +6,5 @@ spring:
 logging:
   # 指定配置文件名称
   config: classpath:logback-spring.xml
+swagger:
+  enable: true

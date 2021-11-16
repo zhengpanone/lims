@@ -1,7 +1,6 @@
 package com.zp.configuration;
 
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootVersion;
@@ -17,11 +16,10 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.List;
 
 /**
  * Swagger 配置类
@@ -51,6 +49,7 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
                 .select()
                 //设置通过什么方式定位需要自动生成文档的接口，
                 //.apis(RequestHandlerSelectors.any())
+                // .apis(RequestHandlerSelectors.basePackage("com.zp"))
                 //这里定位方法上的@ApiOperation注解
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 //接口URI路径设置，any是全路径，也可以通过PathSelectors.regex()正则匹配
@@ -69,9 +68,13 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
+                // 页面标题
                 .title(swaggerProperties.getApplicationDescription() + "Api Doc")
+                // 描述信息
                 .description(swaggerProperties.getApplicationDescription())
+                // 创建人
                 .contact(new Contact("zhengpanone", null, "zhengpanone@hotmail.com"))
+                // 版本号
                 .version("Application Version" + swaggerProperties.getApplicationVersion() + ", Spring Boot Vesion"
                         + SpringBootVersion.getVersion())
                 .build();

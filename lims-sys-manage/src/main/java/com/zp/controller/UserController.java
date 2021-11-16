@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.util.Optional;
 
 /**
  * @author: zhengpanone
@@ -37,7 +38,7 @@ public class UserController extends BaseController implements UserControllerApi 
     @Override
     @GetMapping("/user")
     public ResponseResult findUserById(@PathParam("id")String id){
-        userService.findById(id);
+        Optional<SysUser> byId = userService.findById(id);
         return ResponseResult.SUCCESS();
     }
 
