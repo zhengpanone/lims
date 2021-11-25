@@ -7,23 +7,47 @@ package com.zp.response;
  * @Email zhengpanone@hotmail.com
  * @Modified By:
  */
-public interface ResultCode {
+public enum  ResultCode {
+    /**
+     * 操作成功
+     */
+    SUCCESS(true,10000,"操作成功");
+    ResultCode(boolean success,int code,String message){
+        this.success=success;
+        this.code = code;
+        this.message = message;
+        this.timestamp = System.currentTimeMillis();
+    }
+
     /**
      * 操作是否成功
-     * @return
      */
-    boolean success();
+    boolean success;
 
     /**
      * 操作代码
-     * @return
      */
-    int code();
+    int code;
 
     /**
      * 提示信息
-     * @return
      */
-    String message();
+    String message;
+    /**
+     * 时间戳
+     */
+    long timestamp;
+
+
+
+    public boolean success(){
+        return success;
+    }
+    public int code(){
+        return code;
+    }
+    public String message(){
+        return message;
+    }
 
 }

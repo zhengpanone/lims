@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>lims</artifactId>
         <groupId>com.zp</groupId>
@@ -56,10 +57,40 @@
             <artifactId>poi</artifactId>
             <version>4.1.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.spotify</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>1.2.2</version>
+        </dependency>
 
     </dependencies>
     <build>
+        <finalName>lims-sys</finalName>
         <plugins>
+
+<!--             docker的maven插件，官网： https://github.com/spotify/docker‐maven‐plugin -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker‐maven‐plugin</artifactId>
+                <version>1.2.2</version>
+                <configuration>
+<!--                    生成的镜像名称-->
+                    <imageName>192.168.184.141:5000/${project.artifactId}:${project.version}</imageName>
+<!--                    基础镜像-->
+                    <baseImage>jdk1.8</baseImage>
+
+                    <entryPoint>["java", "‐jar", "/${project.build.finalName}.jar"]</entryPoint>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                    <dockerHost>http://192.168.184.141:2375</dockerHost>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>io.github.swagger2markup</groupId>
                 <artifactId>swagger2markup-maven-plugin</artifactId>
@@ -95,4 +126,8 @@
 
         </plugins>
     </build>
+
+
+
+
 </project>

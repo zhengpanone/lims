@@ -13,9 +13,8 @@ import lombok.NoArgsConstructor;
  */
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Result {
+public class Result<T> {
     /**
      * 是否成功
      */
@@ -31,18 +30,39 @@ public class Result {
     /**
      * 返回数据
      */
-    private Object data;
+    private T data;
+    /**
+     * 时间戳
+     */
+    private long timestamp;
+
+    public Result(){
+        this.timestamp = System.currentTimeMillis();
+    }
 
     public Result(ResultCode code) {
         this.success = code.success();
         this.code = code.code();
         this.message = code.message();
+        this.timestamp = System.currentTimeMillis();
     }
 
-    public Result(ResultCode code, Object data) {
+    public Result(ResultCode code, T data) {
         this.success = code.success();
         this.code = code.code();
         this.message = code.message();
         this.data = data;
+        this.timestamp = System.currentTimeMillis();
+    }
+
+    public Result(Integer code,String message,boolean success){
+        this.code=code;
+        this.message = message;
+        this.success = success;
+        this.timestamp = System.currentTimeMillis();
+    }
+
+    public static Result SUCCESS(){
+        return new Result(ResultCode.SUCCESS);
     }
 }

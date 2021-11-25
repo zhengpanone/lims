@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: zhengpanone
@@ -34,14 +35,14 @@ public class Department extends BaseEntity  {
     @Id
     private String id;
     /**
-     * 父级ID
-     */
-    private String pid;
-
-    /**
      * 企业ID
      */
     private String companyId;
+    /**
+     * 父级部门IDp
+     */
+    private String pid;
+
     /**
      * 部门名称
      */

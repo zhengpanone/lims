@@ -1,7 +1,7 @@
 package com.zp.api.sys;
 
 import com.zp.domain.sys.SysUser;
-import com.zp.response.ResponseResult;
+import com.zp.response.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -23,8 +23,8 @@ public interface UserControllerApi {
     @ApiOperation(value = "新增用户",notes = "新增用户信息")
     @ApiImplicitParams(
             @ApiImplicitParam(name = "user", value = "用户对象", dataTypeClass = SysUser.class, required = true))
-    ResponseResult save(SysUser sysUser);
+    Result save(SysUser sysUser);
 
     @ApiOperation("根据ID查找用户")
-    ResponseResult findUserById(String id);
+    Result findUserById(String id);
 }

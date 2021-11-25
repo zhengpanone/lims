@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
@@ -13,8 +14,10 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
  * @Email zhengpanone@hotmail.com
  * @Modified By:
  */
+
+@EntityScan(value = {"com.zp.domain","com.zp.module"}) // 配置jpa注解的扫描
+@EnableJpaRepositories(basePackages = {"com.zp.dao"})
 @SpringBootApplication
-@EntityScan(value = "com.zp.domain") // 配置jpa注解的扫描
 public class SysManage {
     public static void main(String[] args) {
         SpringApplication.run(SysManage.class, args);
