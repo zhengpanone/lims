@@ -1,8 +1,11 @@
 package com.zp.domain.sys;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -28,6 +31,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(value = "部门",description = "部门实体类")
 public class Department extends BaseEntity  {
     /**
      * ID
@@ -39,17 +43,21 @@ public class Department extends BaseEntity  {
      */
     private String companyId;
     /**
-     * 父级部门IDp
+     * 父级部门ID
      */
+    @Column(name = "parent_id")
+    @ApiModelProperty("父级部门ID")
     private String pid;
 
     /**
      * 部门名称
      */
+    @ApiModelProperty("部门名称")
     private String name;
     /**
      * 部门编码,同级部门不可重复
      */
+    @ApiModelProperty("部门编码")
     private String code;
     /**
      * 负责人ID
@@ -62,6 +70,7 @@ public class Department extends BaseEntity  {
     /**
      * 介绍
      */
+    @ApiModelProperty("部门介绍")
     private String introduce;
     /**
      * 创建时间

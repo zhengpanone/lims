@@ -1,5 +1,7 @@
 package com.zp.controller;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,10 +18,11 @@ public class BaseController {
     protected String companyId;
     protected String companyName;
 
+    @ModelAttribute
     public void setResAndReq(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
         this.response = response;
-        this.companyId = "1";
+        this.companyId = "1440616037694394368";
         this.companyName = "testCompany";
 
     }

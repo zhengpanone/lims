@@ -1,6 +1,8 @@
 package com.zp.domain.sys;
 
 import com.zp.module.BaseEntity;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,6 +25,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
+@ApiModel(value = "企业", description = "企业实体类")
 public class Company extends BaseEntity {
     /**
      * ID
@@ -33,37 +36,38 @@ public class Company extends BaseEntity {
     /**
      * 公司名称
      */
+    @ApiModelProperty(value = "公司名称")
     private String name;
 
     /**
      * 企业登录账号ID
      */
-
+    @ApiModelProperty("企业登录账号ID")
     private String managerId;
     /**
      * 当前版本
      */
-
+    @ApiModelProperty("当前版本")
     private String version;
     /**
      * 续期时间
      */
-
+    @ApiModelProperty("续期时间")
     private Date renewalDate;
     /**
      * 到期时间
      */
-
+    @ApiModelProperty(value = "到期时间")
     private Date expirationDate;
     /**
      * 公司地区
      */
-
+    @ApiModelProperty(value = "公司地区")
     private String companyArea;
     /**
      * 公司地址
      */
-
+    @ApiModelProperty(value = "公司地址")
     private String companyAddress;
     /**
      * 营业执照-图片ID

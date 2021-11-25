@@ -22,29 +22,50 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/company")
-public class DepartmentController implements DepartmentControllerApi {
+public class DepartmentController extends BaseController implements DepartmentControllerApi {
     @Autowired
     private DepartmentService departmentService;
     @Autowired
     private CompanyService companyService;
+
     @PostMapping("/department")
     @Override
     public Result save(@RequestBody Department department) {
         department.setCompanyId("1440616037694394368");
         department.setName("save department");
         departmentService.save(department);
-        return null;
+        return Result.SUCCESS();
     }
-@GetMapping("/department")
-    public Result findAll(){
-        String companyId = "1440616037694394368";
-    Company company = companyService.findById(companyId);
-    List<Department> list = departmentService.findAll(companyId);
-    DepartmentResult departmentResult = new DepartmentResult(company, list);
+    @GetMapping("/department")
+    @Override
+    public Result findAll() {
+        String companyId = this.companyId;
+        Company company = companyService.findById(companyId);
+        List<Department> list = departmentService.findAll(companyId);
+        DepartmentResult departmentResult = new DepartmentResult(company, list);
+        return new Result(ResultCode.SUCCESS, departmentResult);
 
+    }
 
-    return null;
+    @Override
+    @GetMapping("/department/{id}")
+    public Result findById(@PathVariable("id") String id) {
+        Department department = departmentService.findById(id);
+        return new Result(ResultCode.SUCCESS, department);
+    }
 
-}
+    @Override
+    @PutMapping("/department/{id}")
+    public Result update(@PathVariable("id") String id, @RequestBody Department department) {
+        department.setId(id);
+        departmentService.update(department);
+        return Result.SUCCESS();
+    }
+    @Override
+    @DeleteMapping("/department/{id}")
+    public Result delete(@PathVariable("id") String id){
+        departmentService.deleteById(id);
+        return Result.SUCCESS();
+    }
 
 }

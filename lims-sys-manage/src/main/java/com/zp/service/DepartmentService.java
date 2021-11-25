@@ -21,7 +21,7 @@ import java.util.Optional;
  * @since 2021-11-23
  */
 @Service
-public class DepartmentService {
+public class DepartmentService extends BaseService {
     @Autowired
     private DepartmentDao departmentDao;
     @Autowired
@@ -59,21 +59,7 @@ public class DepartmentService {
      * 查询全部部门列表
      */
     public List<Department> findAll(String companyId){
-        Specification<Department> specification = new Specification<Department>() {
-            /**
-             * 用于构造查询条件
-             * @param root 包含所有的对象数据
-             * @param criteriaQuery
-             * @param cb 构造查询条件
-             * @return
-             */
-            @Override
-            public Predicate toPredicate(Root<Department> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb) {
-                // 根据企业id查询
-                return cb.equal(root.get("companyId").as(String.class),companyId);
-            }
-        };
-        return departmentDao.findAll(specification);
+        return departmentDao.findAll(getSpec(companyId));
     }
     /**
      * 根据ID删除部门

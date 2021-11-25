@@ -4,19 +4,25 @@
     <!-- 定义日志存放目录 -->
     <property name="logPath" value="logs"/>
     <!--    日志输出的格式-->
-    <property name="PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t-%L] %-5level %logger{36} %L %M - %msg%xEx%n"/>
+    <property name="LOG_PATTERN" value="%red(%d{yyyy-MM-dd HH:mm:ss.SSS}) %green([%t-%L]) %highlight(%-5level) %boldMagenta(%logger{50}) %L %M - %cyan(%msg%xEx%n)"/>
+<!--    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n" />-->
     <contextName>logback</contextName>
 
     <!--输出到控制台 ConsoleAppender-->
     <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
         <!--展示格式 layout-->
-        <layout class="ch.qos.logback.classic.PatternLayout">
+        <!--<layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>${PATTERN}</pattern>
-        </layout>
+        </layout>-->
         <!--过滤器，只有过滤到指定级别的日志信息才会输出，如果level为ERROR，那么控制台只会输出ERROR日志-->
-        <!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
-        <!--            <level>ERROR</level>-->
-        <!--        </filter>-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!-- <level>ERROR</level>-->
+            <level>info</level>
+        </filter>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
     </appender>
 
     <!--正常的日志文件，输出到文件中-->
@@ -101,8 +107,10 @@
     <logger name="org.springframework.amqp.*" level="DEBUG"></logger>
     <logger name="org.springframework.scheduling.*" level="DEBUG"></logger>
     <!--定义com.xxx..xx..xx包下的日志信息不上传，直接输出到fileDEBUGLog和fileErrorLog这个两个appender中，日志级别为DEBUG-->
-    <logger name="com.xxx.xxx.xx"  additivity="false" level="DEBUG">
+    <logger name="com.zp" additivity="true" level="DEBUG">
         <appender-ref ref="fileDEBUGLog"/>
         <appender-ref ref="fileErrorLog"/>
     </logger>
+
+<!--    private Logger logger = LoggerFactory.getLogger(this.getClass());-->
 </configuration>
