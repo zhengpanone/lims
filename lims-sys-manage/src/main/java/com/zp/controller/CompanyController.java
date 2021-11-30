@@ -33,7 +33,7 @@ public class CompanyController extends BaseController implements CompanyControll
     }
     @Override
     @GetMapping("/company")
-    public Result findAll() {
+    public Result<Company> findAll() {
         List<Company> companies = companyService.findAll();
         return new Result(ResultCode.SUCCESS, companies);
     }

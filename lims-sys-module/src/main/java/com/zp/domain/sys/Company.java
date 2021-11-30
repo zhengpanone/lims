@@ -32,6 +32,7 @@ public class Company extends BaseEntity {
      */
 
     @Id
+    @ApiModelProperty(value = "企业ID")
     private String id;
     /**
      * 公司名称
