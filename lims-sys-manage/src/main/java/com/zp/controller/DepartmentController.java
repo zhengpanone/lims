@@ -34,8 +34,9 @@ public class DepartmentController extends BaseController implements DepartmentCo
         department.setCompanyId("1440616037694394368");
         department.setName("save department");
         departmentService.save(department);
-        return Result.SUCCESS();
+        return Result.ok().message("新增部门成功");
     }
+
     @GetMapping("/department")
     @Override
     public Result findAll() {
@@ -44,7 +45,7 @@ public class DepartmentController extends BaseController implements DepartmentCo
         List<Department> list = departmentService.findAll(companyId);
         DepartmentResult departmentResult = new DepartmentResult(company, list);
         return new Result(ResultCode.SUCCESS, departmentResult);
-
+//        return Result.SUCCESS().data(departmentResult);
     }
 
     @Override
@@ -59,13 +60,14 @@ public class DepartmentController extends BaseController implements DepartmentCo
     public Result update(@PathVariable("id") String id, @RequestBody Department department) {
         department.setId(id);
         departmentService.update(department);
-        return Result.SUCCESS();
+        return Result.ok();
     }
+
     @Override
     @DeleteMapping("/department/{id}")
-    public Result delete(@PathVariable("id") String id){
+    public Result delete(@PathVariable("id") String id) {
         departmentService.deleteById(id);
-        return Result.SUCCESS();
+        return Result.ok();
     }
 
 }

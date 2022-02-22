@@ -11,7 +11,8 @@ public enum  ResultCode {
     /**
      * 操作成功
      */
-    SUCCESS(true,10000,"操作成功");
+    SUCCESS(true,10000,"操作成功"),
+    FAIL(false,40000,"");
     ResultCode(boolean success,int code,String message){
         this.success=success;
         this.code = code;

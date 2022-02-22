@@ -1,4 +1,4 @@
-package com.zp.utils;
+package com.zp.util;
 
 import cn.hutool.core.lang.UUID;
 import com.alibaba.fastjson.JSON;

@@ -1,5 +1,7 @@
 package com.zp.response;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,7 @@ import lombok.NoArgsConstructor;
  * @Email zhengpanone@hotmail.com
  * @Modified By:
  */
-
+@ApiModel
 @Data
 @AllArgsConstructor
 public class Result<T> {
@@ -22,18 +24,23 @@ public class Result<T> {
     /**
      * 返回码
      */
-    private int code;
+    @ApiModelProperty(value = "返回码",example = "200")
+    private Integer code;
+
     /**
      * 返回信息
      */
+    @ApiModelProperty(value = "返回码描述", example = "OK")
     private String message;
     /**
      * 返回数据
      */
+    @ApiModelProperty(value = "返回结果")
     private T data;
     /**
      * 时间戳
      */
+    @ApiModelProperty(value = "响应时间戳", example = "2020-08-12 14:37:11")
     private long timestamp;
 
     public Result(){
@@ -62,7 +69,20 @@ public class Result<T> {
         this.timestamp = System.currentTimeMillis();
     }
 
-    public static Result SUCCESS(){
+    public static Result ok(){
         return new Result(ResultCode.SUCCESS);
+    }
+
+    public static Result fail(){
+        return new Result(ResultCode.FAIL);
+    }
+
+    public Result<T> message(String message){
+        this.setMessage(message);
+        return this;
+    }
+    public Result<T> data(T data){
+        this.setData(data);
+        return this;
     }
 }

@@ -1,4 +1,4 @@
-package com.zp.utils;
+package com.zp.util;
 
 import lombok.Data;
 

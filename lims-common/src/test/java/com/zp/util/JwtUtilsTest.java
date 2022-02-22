@@ -1,4 +1,4 @@
-package com.zp.utils;
+package com.zp.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
