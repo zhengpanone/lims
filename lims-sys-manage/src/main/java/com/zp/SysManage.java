@@ -14,9 +14,6 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
  * @Email zhengpanone@hotmail.com
  * @Modified By:
  */
-
-@EntityScan(value = {"com.zp.domain","com.zp.module"}) // 配置jpa注解的扫描
-@EnableJpaRepositories(basePackages = {"com.zp.dao"})
 @SpringBootApplication
 public class SysManage {
     public static void main(String[] args) {

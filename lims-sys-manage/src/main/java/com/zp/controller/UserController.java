@@ -1,49 +1,41 @@
 package com.zp.controller;
 
-import com.zp.annotation.SysLog;
-import com.zp.api.sys.UserControllerApi;
-import com.zp.domain.sys.SysUser;
-import com.zp.response.Result;
-import com.zp.response.ResultCode;
-import com.zp.service.UserService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import javax.websocket.server.PathParam;
+import com.zp.controller.dto.LoginDTO;
+import com.zp.controller.vo.UserVO;
+import com.zp.response.R;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author: zhengpanone
+ * @Author: zhengpanone
  * @Description:
- * @Date:Created in 2021/08/08 9:28.
+ * @Date:Created in 2021/08/06 21:07.
  * @Email zhengpanone@hotmail.com
  * @Modified By:
  */
-
-@CrossOrigin // 解决跨域问题
+@RequestMapping("/user")
 @RestController
-@RequestMapping("/sys")
-public class UserController extends BaseController implements UserControllerApi {
-    @Autowired
-    private UserService userService;
+public class UserController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-
-    @Override
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
-    @SysLog("新增用户")
-    public Result save(@RequestBody SysUser sysUser) {
-        sysUser.setCompanyId(companyId);
-        sysUser.setCompanyName(companyName);
-        userService.save(sysUser);
-        return new Result(ResultCode.SUCCESS);
+    @PostMapping("/login")
+    public R<UserVO> login(@Validated @RequestBody LoginDTO loginDTO) {
+        LOGGER.info("提交的用户数据为:" + loginDTO.toString());
+        UserVO userVO = new UserVO();
+        userVO.setUserId(1);
+        userVO.setUserName(loginDTO.getUserName());
+        userVO.setUserLevel(10);
+        return R.success(userVO);
     }
 
-    @Override
-    @GetMapping("/user")
-    @SysLog("查询用户")
-    public Result findUserById(@PathParam("id") String id) {
-        userService.findById(id);
-        return new Result(ResultCode.SUCCESS);
+    @PostMapping("/register")
+    public R<?> register(@Validated LoginDTO loginDTO) {
+        return R.success();
     }
-
 }

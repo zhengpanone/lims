@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -16,18 +17,16 @@
 
     <!--系统模板 -->
     <modules>
-        <module>lims-generator</module>
         <module>lims-sys-module</module>
         <module>lims-sys-manage</module>
-        <module>lims-sys-service-api</module>
         <module>lims-utils</module>
         <module>lims-common</module>
     </modules>
     <!--版本说明 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
 
         <mysql.version>8.0.22</mysql.version>
         <springfox.version>3.0.0</springfox.version>
@@ -37,12 +36,22 @@
         <hutool.version>5.6.2</hutool.version>
         <fastjson.version>1.2.75</fastjson.version>
         <screw-core.version>1.0.5</screw-core.version>
+        <okhttp.version>4.9.3</okhttp.version>
     </properties>
 
     <!--全局依赖 -->
     <dependencies>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp.version}</version>
+        </dependency>
         <!-- spring boot starter -->
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -60,11 +69,7 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
-        <!-- jpa -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
+
 
         <!-- lombok -->
         <dependency>
@@ -121,11 +126,11 @@
             <version>10.2.0.3.0</version>
         </dependency>-->
         <!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc10 -->
-       <!-- <dependency>
-            <groupId>com.oracle.database.jdbc</groupId>
-            <artifactId>ojdbc10</artifactId>
-            <version>19.10.0.0</version>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>com.oracle.database.jdbc</groupId>
+             <artifactId>ojdbc10</artifactId>
+             <version>19.10.0.0</version>
+         </dependency>-->
 
 
     </dependencies>
@@ -154,11 +159,7 @@
                 <artifactId>lims-sys-module</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.zp</groupId>
-                <artifactId>lims-sys-service-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>com.zp</groupId>
                 <artifactId>lims-sys-manage</artifactId>
@@ -178,18 +179,18 @@
             </dependency>
 
             <!-- mysql -->
-            <dependency>
+            <!--<dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
-            </dependency>
+            </dependency>-->
 
             <!--shiro-spring-->
-           <!-- <dependency>
-                <groupId>org.apache.shiro</groupId>
-                <artifactId>shiro-spring</artifactId>
-                <version>${shiro.version}</version>
-            </dependency>-->
+            <!-- <dependency>
+                 <groupId>org.apache.shiro</groupId>
+                 <artifactId>shiro-spring</artifactId>
+                 <version>${shiro.version}</version>
+             </dependency>-->
             <!--在外部tomcat中发布故移除内置包-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
