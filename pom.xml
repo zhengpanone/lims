@@ -138,7 +138,6 @@
 
     <dependencyManagement>
         <dependencies>
-
             <dependency>
                 <groupId>com.zp</groupId>
                 <artifactId>lims-generator</artifactId>
@@ -197,6 +196,7 @@
                 <artifactId>spring-boot-starter-tomcat</artifactId>
                 <scope>provided</scope>
             </dependency>
+
 
         </dependencies>
 

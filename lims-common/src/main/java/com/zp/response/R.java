@@ -30,7 +30,7 @@ public class R<T> implements Serializable {
      * 返回信息
      */
     @ApiModelProperty(value = "返回码描述", example = "OK")
-    private String message;
+    private String msg;
     /**
      * 返回数据
      */
@@ -52,7 +52,7 @@ public class R<T> implements Serializable {
      */
     protected R(int code, String message) {
         this.code = code;
-        this.message = message;
+        this.msg = message;
     }
 
     /**
@@ -64,7 +64,7 @@ public class R<T> implements Serializable {
      */
     protected R(int code, String message, T data) {
         this.code = code;
-        this.message = message;
+        this.msg = message;
         this.data = data;
     }
 
@@ -104,7 +104,7 @@ public class R<T> implements Serializable {
     public static <T> R<T> instance(Integer code, String message, T data) {
         R<T> result = new R<>();
         result.setCode(code);
-        result.setMessage(message);
+        result.setMsg(message);
         result.setData(data);
         return result;
     }

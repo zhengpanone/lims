@@ -5,3 +5,8 @@ server:
 spring:
   application: # 应用配置
     name: sys-dev # 指定服务名
+
+  redis:
+    host: 192.168.18.215
+    port: 6379
+    database: 0
