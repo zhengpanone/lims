@@ -1,6 +1,7 @@
 package com.zp.service.impl;
 
 import com.zp.RedisUtils;
+import com.zp.exception.BusinessException;
 import com.zp.response.R;
 import com.zp.service.VerifyService;
 import com.zp.util.CaptchaVerifyUtil;
@@ -56,7 +57,7 @@ public class VerifyServiceImpl implements VerifyService {
         }
         // 生成图片验证码
         Object[] verify = CaptchaVerifyUtil.newBuilder().build().createImage();
-        String verifyCode = (String) verify[0];
+        String verifyCode = ((String) verify[0]).toUpperCase();
         // 将验证码存入session
         session.setAttribute("SESSION_VERIFY_CODE_" + sessionId, verifyCode);
         // 将验证码存入redis
@@ -73,8 +74,8 @@ public class VerifyServiceImpl implements VerifyService {
 
     @Override
     public R<?> checkCode(String verificationCode) {
-        if (!redisUtils.hasKey(verificationCode)) {
-            return R.failed(10000, "验证码错误");
+        if (!redisUtils.hasKey(verificationCode.toUpperCase())) {
+            throw new BusinessException("验证码错误");
         }
         redisUtils.del(verificationCode);
         return R.success();
