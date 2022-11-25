@@ -1,5 +1,6 @@
 package com.zp.controller;
 
+import com.zp.annotation.LimitRequest;
 import com.zp.response.R;
 import com.zp.service.VerifyService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ import java.io.IOException;
 public class VerifyController {
     private final VerifyService verifyService;
 
+    @LimitRequest(count = 5)
     @GetMapping("/getCode")
     public void getCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
         verifyService.createCode(request, response);
