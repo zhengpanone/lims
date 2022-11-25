@@ -4,15 +4,17 @@ package com.zp.controller;
 import com.zp.RedisUtils;
 import com.zp.controller.dto.LoginDTO;
 import com.zp.controller.vo.LoginInfoVO;
-import com.zp.controller.vo.UserVO;
+import com.zp.controller.vo.LoginVO;
+import com.zp.controller.vo.UserInfo;
 import com.zp.response.R;
-import jdk.nashorn.internal.objects.annotations.Getter;
+import com.zp.service.VerifyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,15 +31,22 @@ public class UserController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     @Autowired
     RedisUtils redisUtils;
+    @Autowired
+    VerifyService verifyService;
 
     @PostMapping("/login")
-    public R<UserVO> login(@Validated @RequestBody LoginDTO loginDTO) {
+    public R<LoginVO> login(@Validated @RequestBody LoginDTO loginDTO) {
         LOGGER.info("提交的用户数据为:" + loginDTO.toString());
-        UserVO userVO = new UserVO();
-        userVO.setUserId(1);
-        userVO.setUserName(loginDTO.getUserName());
-        userVO.setUserLevel(10);
-        return R.success(userVO);
+        verifyService.checkCode(loginDTO.getImgCode());
+        LoginVO loginVO = new LoginVO();
+        loginVO.setToken("token");
+        loginVO.setVersion("1.0.0");
+        loginVO.setExpiresTime(new Date());
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId("1");
+        userInfo.setAccount(loginDTO.getAccount());
+        loginVO.setUserInfo(userInfo);
+        return R.success(loginVO);
     }
 
     @PostMapping("/register")
@@ -56,6 +65,7 @@ public class UserController {
         infoVO.setLoginLogo("loginLogo");
         infoVO.setLogoRectangle("logo rectangle");
         infoVO.setLogoSquare("logo square");
+
         return R.success(infoVO);
     }
     @GetMapping("/redis")
