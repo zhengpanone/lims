@@ -8,6 +8,8 @@ import java.util.Random;
 /**
  * CaptchaVerifyUtil 图片验证码工具类
  *
+ * https://blog.csdn.net/qq_51705526/article/details/124112240
+ *
  * @author zhengpanone
  * @since 2022-11-24
  */
@@ -141,11 +143,11 @@ public class CaptchaVerifyUtil {
         // 默认字符数量
         private int size = 4;
         // 默认干扰线数量
-        private int lines = 10;
+        private int lines = 8;
         // 默认宽度
-        private int width = 80;
+        private int width = 110;
         // 默认高度
-        private int height = 35;
+        private int height = 27;
         // 默认字体大小
         private int fontSize = 25;
         // 默认字体倾斜

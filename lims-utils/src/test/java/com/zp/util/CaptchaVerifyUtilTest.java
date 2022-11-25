@@ -14,7 +14,7 @@ public class CaptchaVerifyUtilTest {
     @Test
     public void test1(){
         Object[] image = CaptchaVerifyUtil.newBuilder().build().createImage();
-        System.out.println(image);
+        System.out.println(image[0]);
 
     }
 
@@ -30,7 +30,7 @@ public class CaptchaVerifyUtilTest {
                 .setBackgroundColor(Color.WHITE) //设置验证码的背景颜色
                 .build()         //构建VerifyUtil项目
                 .createImage();  //生成图片
-        System.out.println(image);
+        System.out.println(image[0]);
 
     }
 
