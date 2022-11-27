@@ -54,6 +54,12 @@ public class UserController {
         return R.success();
     }
 
+
+    @PostMapping("/logout")
+    public R<?> logout() {
+        return R.success();
+    }
+
     /**
      * 登录页 图片数据
      * @return
