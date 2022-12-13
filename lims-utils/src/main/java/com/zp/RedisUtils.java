@@ -3,9 +3,6 @@ package com.zp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
-
-import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -45,7 +42,7 @@ public class RedisUtils {
      * @param key 不能为null
      * @return 时间(秒) 返回0代表为永久有效
      */
-    public Optional<Long> getExpire(@Nonnull String key) {
+    public Optional<Long> getExpire(String key) {
         return Optional.ofNullable(redisTemplate.getExpire(key, TimeUnit.SECONDS));
     }
 
@@ -55,7 +52,7 @@ public class RedisUtils {
      * @param key 键
      * @return true 存在 false不存在
      */
-    public boolean hasKey(@Nonnull String key) {
+    public boolean hasKey(String key) {
         try {
             return redisTemplate.hasKey(key);
         } catch (Exception e) {

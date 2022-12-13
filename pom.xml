@@ -17,19 +17,21 @@
 
     <!--系统模板 -->
     <modules>
-        <module>lims-sys-module</module>
         <module>lims-sys-manage</module>
         <module>lims-utils</module>
         <module>lims-common</module>
+        <module>lims-generator</module>
     </modules>
     <!--版本说明 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <java.version>1.8</java.version>
 
         <mysql.version>8.0.22</mysql.version>
-        <springfox.version>3.0.0</springfox.version>
+        <springfox.version>2.9.2</springfox.version>
+        <knife4j.version>2.0.4</knife4j.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <shiro.version>1.8.0</shiro.version>
         <lombok.version>1.18.20</lombok.version>
@@ -37,6 +39,7 @@
         <fastjson.version>1.2.75</fastjson.version>
         <screw-core.version>1.0.5</screw-core.version>
         <okhttp.version>4.9.3</okhttp.version>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
     </properties>
 
     <!--全局依赖 -->
@@ -70,6 +73,17 @@
             <optional>true</optional>
         </dependency>
 
+        <!--在外部tomcat中发布故移除内置包-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
 
         <!-- lombok -->
         <dependency>
@@ -95,16 +109,21 @@
             <version>${fastjson.version}</version>
         </dependency>
 
+        <!-- swagger2 -->
         <dependency>
             <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+        <!--swagger-ui-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
 
         <!--  Knife4j-->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
-            <version>3.0.2</version>
         </dependency>
 
         <!-- screw 库，简洁好用的数据库表结构文档生成器 -->
@@ -170,18 +189,53 @@
                 <artifactId>screw-core</artifactId>
                 <version>${screw-core.version}</version>
             </dependency>
-            <!-- swagger3 -->
+            <!-- swagger2 -->
             <dependency>
                 <groupId>io.springfox</groupId>
-                <artifactId>springfox-boot-starter</artifactId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+            <!--swagger-ui-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
                 <version>${springfox.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
             <!-- mysql -->
-            <!--<dependency>
+            <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
+            </dependency>
+            <!--mybatis-plus-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter-test</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <!-- mybatis-plus 多数据源 -->
+            <!--<dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
             </dependency>-->
 
             <!--shiro-spring-->
@@ -190,16 +244,8 @@
                  <artifactId>shiro-spring</artifactId>
                  <version>${shiro.version}</version>
              </dependency>-->
-            <!--在外部tomcat中发布故移除内置包-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-tomcat</artifactId>
-                <scope>provided</scope>
-            </dependency>
-
 
         </dependencies>
-
 
     </dependencyManagement>
 </project>
