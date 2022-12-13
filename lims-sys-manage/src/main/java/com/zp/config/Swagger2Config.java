@@ -1,6 +1,7 @@
 package com.zp.config;
 
 
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -17,9 +18,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * http://localhost:8081/swagger-ui.html
+ * http://localhost:8081/doc.html
  */
 @Configuration
 @EnableSwagger2
+@EnableKnife4j
 @ConditionalOnClass(Docket.class)
 public class Swagger2Config {
     private static final String VERSION = "1.0";

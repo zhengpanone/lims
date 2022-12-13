@@ -20,7 +20,6 @@
         <module>lims-sys-manage</module>
         <module>lims-utils</module>
         <module>lims-common</module>
-        <module>lims-generator</module>
     </modules>
     <!--版本说明 -->
     <properties>
@@ -113,6 +112,16 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.swagger</groupId>
+                    <artifactId>swagger-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.swagger</groupId>
+                    <artifactId>swagger-models</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--swagger-ui-->
         <dependency>
