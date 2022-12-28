@@ -6,10 +6,11 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * RoleMapper
+ * SysUser
  *
  * @author zhengpanone
  * @since 2022-11-28
+ * @description: 用户表数据访问层
  */
 @Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {

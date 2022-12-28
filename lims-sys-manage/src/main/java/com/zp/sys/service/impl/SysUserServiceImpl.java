@@ -11,7 +11,7 @@ import com.zp.sys.entity.SysUserRole;
 import com.zp.sys.mapper.SysUserMapper;
 import com.zp.sys.mapper.SysUserPostMapper;
 import com.zp.sys.mapper.SysUserRoleMapper;
-import com.zp.sys.service.IUserService;
+import com.zp.sys.service.ISysUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +24,10 @@ import java.util.Optional;
  *
  * @author zhengpanone
  * @since 2022-11-28
+ * @description: 用户服务实现类
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements IUserService {
+public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
     //private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
     @Autowired
     private SysUserMapper sysUserMapper;

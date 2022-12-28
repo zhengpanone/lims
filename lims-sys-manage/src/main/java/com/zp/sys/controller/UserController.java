@@ -4,7 +4,7 @@ package com.zp.sys.controller;
 import com.zp.response.R;
 import com.zp.sys.controller.dto.RegisterDTO;
 import com.zp.sys.entity.SysUser;
-import com.zp.sys.service.IUserService;
+import com.zp.sys.service.ISysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -28,12 +28,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
-    private final IUserService userService;
+    private final ISysUserService sysUserService;
 
     @ApiOperation(value = "用户注册")
     @PostMapping("/register")
     public R<?> register(@Validated @RequestBody RegisterDTO registerDTO) {
-        SysUser sysUser = userService.register(registerDTO);
+        SysUser sysUser = sysUserService.register(registerDTO);
         if (sysUser == null) {
             return R.failed();
         }

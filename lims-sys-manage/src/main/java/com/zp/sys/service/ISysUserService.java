@@ -10,8 +10,9 @@ import com.zp.sys.entity.SysUser;
  *
  * @author zhengpanone
  * @since 2022-11-28
+ * @description: 用户服务接口
  */
-public interface IUserService extends IService<SysUser> {
+public interface ISysUserService extends IService<SysUser> {
     Boolean saveUser(UserDTO userDTO);
 
     /**
