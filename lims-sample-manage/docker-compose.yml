@@ -7,5 +7,5 @@ services:
     ports:
       - "8091:8091"
     volumes:
-      - ./lims-sample-manage.jar:/project/lims-sample-manage.jar
-    command: java -Xms512M -Xmx512M  -jar -Duser.timezone=GMT+08 /project/lims-sample-manage.jar
+      - ./target/lims-sample-manage.jar:/project/lims-sample-manage.jar
+    command: /opt/jdk1.8.0_301/bin/java -Xms512M -Xmx512M  -jar -Duser.timezone=GMT+08 /project/lims-sample-manage.jar
