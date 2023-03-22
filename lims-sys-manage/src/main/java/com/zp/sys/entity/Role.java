@@ -3,6 +3,7 @@ package com.zp.sys.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.zp.entity.BaseEntity;
 import com.zp.enums.StatusEnum;
 import lombok.Builder;
 import lombok.Data;

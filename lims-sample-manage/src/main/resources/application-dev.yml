@@ -3,3 +3,10 @@ server:
 spring:
   application: # 应用配置
     name: lims-sample-manage # 指定服务名
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/lims?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone =Asia/Shanghai
+    username: root
+    password: root
+
