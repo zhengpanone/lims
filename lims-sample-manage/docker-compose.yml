@@ -11,12 +11,13 @@ services:
     command: /opt/jdk1.8.0_301/bin/java -Xms512M -Xmx512M  -jar -Duser.timezone=GMT+08 /project/lims-sample-manage.jar
 
   mysql:
+    env_file:
+      - .env
     image: mysql:${MYSQL_VERSION}
     container_name: mysql5.7
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     restart: always
-    env_file:
-      - ../.env
+    
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} #设置root帐号密码
       TZ: Asia/Shanghai
@@ -29,4 +30,4 @@ services:
       - ${MYSQL_CONF_MYSQL_FILE}:/etc/mysql/mysql.cnf #配置文件挂载
       - ${MYSQL_LOG_DIR}:/var/log/mysql #日志文件挂载
       - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone/timezone:/etc/timezone:ro
+      - /etc/timezone:/etc/timezone:ro
