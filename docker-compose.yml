@@ -2,48 +2,39 @@ version: "3.8"
 services:
 	# 服务名称
 	lims-sys-8089:
-	 # Dockerfile所在目录(. 表示同级目录下)
-	 build: .
-	 # 镜像名称
-	 image: java:8
-	 # 容器名称
-	 container_name: lims-sys-8089
-   working_dir: /testProject
+	 # build: . # Dockerfile所在目录(. 表示同级目录下)
+	 image: java:8 # 镜像名称
+	 container_name: lims-sys-8081 # 容器名称
 	 restart: always
-	 # 端口
-	 ports:
-	      - 8089:8089
-	 # 挂载
-   # 与boot-demo-8088相比修改Dockerfile中的ENV环境变量(多个变量不加`-`直接换行即可，参数不能有空格)
-	 volumes:
-	    - /workspaces/lims/logs:/usr/local/application/logs
-      - ./logs:/logs/web_app/testProject #根据实际日志目录修改
-      - ./testProject-1.0.0.jar:/testProject/testProject-1.0.0.jar
-      - ./config:/testProject/config 
-      - /etc/localtime:/etc/localtime
+	 ports:  # 端口
+	    - "8081:8081"
+	 volumes:  # 挂载
+        - ./logs:/logs/web_app/testProject #根据实际日志目录修改
+        - ./testProject-1.0.0.jar:/testProject/testProject-1.0.0.jar
+        - ./config:/testProject/config 
+        - /etc/localtime:/etc/localtime
 	 environment:
-      - SET_CONTAINER_TIMEZONE=true
-      - CONTAINER_TIMEZONE=Asia/Shanghai
-
-    command: java -Xms512M -Xmx512M  -jar -Duser.timezone=GMT+08 /testProject/testProject-1.0.0.jar --spring.config.location=/testProject/config/application.yml
+        - SET_CONTAINER_TIMEZONE=true
+        - CONTAINER_TIMEZONE=Asia/Shanghai
+     command:  -java -Xms512M -Xmx512M  -jar -Duser.timezone=GMT+08 /testProject/testProject-1.0.0.jar --spring.config.location=/testProject/config/application.yml
 	    
 
-  nginx:      #定义nginx服务
-    hostname: nginx      #容器的主机名为nginx
-    build:               #定义创建容器的过程 //如果有线程的镜像，直接写images: 
-      context: ./nginx   #指定创建容器的目录位置(存储dockerfile的目录)
-      dockerfile: Dockerfile   #指定Dockerfile文件
-    ports:            #定义端口
-      - 1234:80       #暴露端口
-      - 4321:443      #暴露端口
-    networks:                      #指定网络
-      ydq:                         #指定网络名称
-        ipv4_address: 172.100.0.10  #指定ip地址
-    volumes:                                 #数据卷，挂载目录
-      - ./wwwroot:/usr/local/nginx/html      #前面宿主机，后面容器
-networks:               #自定义网络
-  ydq:                  #自定义网络名称
-   driver: bridge       #自定义网络模式
-   ipam:                #网络管理器
-     config:            #配置参数
-       - subnet: 172.100.0.0/16    #配置子网网段 
+#  nginx:      #定义nginx服务
+#    hostname: nginx      #容器的主机名为nginx
+#    build:               #定义创建容器的过程 //如果有线程的镜像，直接写images:
+#      context: ./nginx   #指定创建容器的目录位置(存储dockerfile的目录)
+#      dockerfile: Dockerfile   #指定Dockerfile文件
+#    ports:            #定义端口
+#      - 1234:80       #暴露端口
+#      - 4321:443      #暴露端口
+#    networks:                      #指定网络
+#      ydq:                         #指定网络名称
+#        ipv4_address: 172.100.0.10  #指定ip地址
+#    volumes:                                 #数据卷，挂载目录
+#      - ./wwwroot:/usr/local/nginx/html      #前面宿主机，后面容器
+#networks:               #自定义网络
+#  ydq:                  #自定义网络名称
+#   driver: bridge       #自定义网络模式
+#   ipam:                #网络管理器
+#     config:            #配置参数
+#       - subnet: 172.100.0.0/16    #配置子网网段

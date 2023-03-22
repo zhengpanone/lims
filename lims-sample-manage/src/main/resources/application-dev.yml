@@ -1,0 +1,5 @@
+server:
+  port: 8091
+spring:
+  application: # 应用配置
+    name: lims-sample-manage # 指定服务名
