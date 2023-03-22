@@ -1,23 +1,32 @@
 version: "3.8"
 services:
 	# 服务名称
-	boot-demo-8089:
+	lims-sys-8089:
 	 # Dockerfile所在目录(. 表示同级目录下)
 	 build: .
 	 # 镜像名称
-	 image: boot-demo-8089
+	 image: java:8
 	 # 容器名称
-	 container_name: boot-demo-8089
+	 container_name: lims-sys-8089
+   working_dir: /testProject
 	 restart: always
 	 # 端口
 	 ports:
-	      - "8089:8089"
+	      - 8089:8089
 	 # 挂载
+   # 与boot-demo-8088相比修改Dockerfile中的ENV环境变量(多个变量不加`-`直接换行即可，参数不能有空格)
 	 volumes:
-	      - /home/server/boot-demo-test/boot-demo-8089/logs:/usr/local/application/logs
-     # 与boot-demo-8088相比修改Dockerfile中的ENV环境变量(多个变量不加`-`直接换行即可，参数不能有空格)
+	    - /workspaces/lims/logs:/usr/local/application/logs
+      - ./logs:/logs/web_app/testProject #根据实际日志目录修改
+      - ./testProject-1.0.0.jar:/testProject/testProject-1.0.0.jar
+      - ./config:/testProject/config 
+      - /etc/localtime:/etc/localtime
 	 environment:
-	      SERVER_NAME: "this-is-boot-demo-8089"
+      - SET_CONTAINER_TIMEZONE=true
+      - CONTAINER_TIMEZONE=Asia/Shanghai
+
+    command: java -Xms512M -Xmx512M  -jar -Duser.timezone=GMT+08 /testProject/testProject-1.0.0.jar --spring.config.location=/testProject/config/application.yml
+	    
 
   nginx:      #定义nginx服务
     hostname: nginx      #容器的主机名为nginx
