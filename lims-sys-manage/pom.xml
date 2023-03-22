@@ -14,10 +14,6 @@
     <dependencies>
         <dependency>
             <groupId>com.zp</groupId>
-            <artifactId>lims-sys-module</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.zp</groupId>
             <artifactId>lims-common</artifactId>
         </dependency>
         <dependency>
