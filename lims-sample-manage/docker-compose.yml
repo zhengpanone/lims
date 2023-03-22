@@ -1,11 +1,30 @@
 version: "3.8"
 services:
-  lims-sample-8091:
+  lims-sample-manage:
     image: zhengpanone/jdk8:latest
-    container_name: lims-sample-8091
+    container_name: lims-sample-manage
     working_dir: /project
     ports:
       - "8091:8091"
     volumes:
       - ./target/lims-sample-manage.jar:/project/lims-sample-manage.jar
     command: /opt/jdk1.8.0_301/bin/java -Xms512M -Xmx512M  -jar -Duser.timezone=GMT+08 /project/lims-sample-manage.jar
+
+  mysql:
+    image: mysql:${MYSQL_VERSION}
+    container_name: mysql5.7
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} #设置root帐号密码
+      TZ: Asia/Shanghai
+    ports:
+      - "${MYSQL_HOST_PORT}:3306"
+    volumes:
+      - ${MYSQL_DATA_DIR}:/var/lib/mysql #数据文件挂载
+      - ${MYSQL_CONF_DIR}:/etc/mysql/conf.d #配置文件挂载
+      - ${MYSQL_CONF_MY_FILE}:/etc/mysql/my.cnf #配置文件挂载
+      - ${MYSQL_CONF_MYSQL_FILE}:/etc/mysql/mysql.cnf #配置文件挂载
+      - ${MYSQL_LOG_DIR}:/var/log/mysql #日志文件挂载
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone/timezone:/etc/timezone:ro
