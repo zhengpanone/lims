@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import com.zp.sys.entity.SysUser;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.logging.Logger;
+import org.junit.platform.commons.logging.LoggerFactory;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -35,6 +37,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class UserMapperTest {
     @Autowired
     private SysUserMapper userMapper;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserMapperTest.class);
 
 
     @Test

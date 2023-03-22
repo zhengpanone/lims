@@ -1,6 +1,7 @@
 package com.zp.sys.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zp.sys.controller.dto.LoginDTO;
 import com.zp.sys.controller.dto.RegisterDTO;
 import com.zp.sys.controller.dto.UserDTO;
 import com.zp.sys.entity.SysUser;
@@ -19,4 +20,6 @@ public interface ISysUserService extends IService<SysUser> {
      * 注册功能
      */
     SysUser register(RegisterDTO registerDTO);
+
+    String login(LoginDTO loginDTO);
 }

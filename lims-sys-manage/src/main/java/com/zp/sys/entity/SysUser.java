@@ -33,6 +33,26 @@ public class SysUser extends BaseEntity {
      */
     private String salt;
     /**
+     * 手机
+     */
+    private String mobile;
+    /**
+     * 邮箱
+     */
+    private String email;
+    /**
+     * 性别
+     */
+    private String gender;
+    /**
+     * 图标
+     */
+    private String avatar;
+    /**
+     * 是否删除
+     */
+    private String isDelete;
+    /**
      * 部门ID
      */
     private Long deptId;

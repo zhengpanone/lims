@@ -1,4 +1,4 @@
-package com.zp.controller.vo;
+package com.zp.sys.controller.vo;
 
 import lombok.Data;
 

@@ -2,7 +2,6 @@ package com.zp.sys.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zp.sys.entity.SysUser;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -12,7 +11,7 @@ import org.apache.ibatis.annotations.Param;
  * @since 2022-11-28
  * @description: 用户表数据访问层
  */
-@Mapper
+//@Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {
     /**
      * 判断是否存在用户

@@ -3,6 +3,7 @@ package com.zp.sys.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zp.enums.StatusEnum;
+import com.zp.sys.controller.dto.LoginDTO;
 import com.zp.sys.controller.dto.RegisterDTO;
 import com.zp.sys.controller.dto.UserDTO;
 import com.zp.sys.entity.SysUser;
@@ -49,11 +50,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public Boolean saveUser(UserDTO userDTO) {
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(userDTO, sysUser);
-        sysUser.setLockFlag(StatusEnum.ACTIVE.getValue());
-//        sysUser.setPassword(userDTO.getPassword());// TODO 密码加密
         sysUserMapper.insert(sysUser);
-        userDTO.getRole().stream().map(roleId -> {
-            SysUserRole sysUserRole = new SysUserRole();
+        userDTO.getRole().stream().map(roleId -> {SysUserRole sysUserRole = new SysUserRole();
             sysUserRole.setUserId(sysUser.getUserId());
             sysUserRole.setRoleId(roleId);
             return sysUserRole;
@@ -78,8 +76,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         if(count!=null){
             return null;
         }
+        sysUser.setLockFlag(StatusEnum.ACTIVE.getValue());
+        //        sysUser.setPassword(userDTO.getPassword());// TODO 密码加密
         sysUserMapper.insert(sysUser);
         return sysUser;
 
+    }
+
+    @Override
+    public String login(LoginDTO loginDTO) {
+        return null;
     }
 }

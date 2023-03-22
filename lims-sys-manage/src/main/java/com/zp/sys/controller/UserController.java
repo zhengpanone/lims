@@ -2,6 +2,7 @@ package com.zp.sys.controller;
 
 
 import com.zp.response.R;
+import com.zp.sys.controller.dto.LoginDTO;
 import com.zp.sys.controller.dto.RegisterDTO;
 import com.zp.sys.entity.SysUser;
 import com.zp.sys.service.ISysUserService;
@@ -38,6 +39,12 @@ public class UserController {
             return R.failed();
         }
         return R.success(sysUser);
+    }
+@ApiOperation(value = "用户登录,返回token")
+    @PostMapping("/login")
+    public R<?> login(LoginDTO loginDTO){
+    String token = sysUserService.login(loginDTO);
+    return R.success();
     }
 
 

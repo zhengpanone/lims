@@ -1,4 +1,4 @@
-package com.zp.controller.dto;
+package com.zp.sys.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
