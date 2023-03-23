@@ -103,7 +103,7 @@ public class TokenController {
         adminVO4.setRealName("realName2");
         adminVO4.setStatus(0);
         adminVO4.setAccount("admin2");
-        page.setTotal(4);
+        page.setTotal(4L);
         page.setList(Arrays.asList(adminVO1, adminVO2, adminVO3, adminVO4));
         return R.success(page);
     }

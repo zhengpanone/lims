@@ -19,7 +19,6 @@ import java.io.Serializable;
 @Data
 public class R<T> implements Serializable {
 
-
     /**
      * 返回码
      */
