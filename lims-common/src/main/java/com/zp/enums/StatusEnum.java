@@ -1,7 +1,9 @@
 package com.zp.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.baomidou.mybatisplus.annotation.IEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * StatusEnum 启用禁用枚举类
@@ -18,11 +20,13 @@ public enum  StatusEnum implements IEnum<String> {
     /**
      * 编码
      */
-    private String code;
+    @EnumValue //标记数据库存的值是code
+    @JsonValue //标记响应json值
+    private final String code;
     /**
      * 名称
      */
-    private String name;
+    private final  String name;
 
     StatusEnum(String code, String name) {
         this.code = code;

@@ -7,7 +7,7 @@ import com.zp.base.controller.BaseController;
 
 @RestController
 public class TestController extends BaseController {
-    @GetMapping
+    @GetMapping("/")
     public String test() {
         return "lims sample manage";
     }

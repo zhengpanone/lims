@@ -2,16 +2,22 @@ package com.zp.sys.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zp.base.entity.BaseEntity;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * i18n 国际化
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@Builder
+@TableName("sys_i18n")
 public class SysI18nEntity extends BaseEntity {
 
     @TableId(value = "i18n_id", type = IdType.ASSIGN_ID)

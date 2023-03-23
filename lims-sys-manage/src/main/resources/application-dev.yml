@@ -15,6 +15,13 @@ spring:
     host: 192.168.18.215
     port: 6379
     database: 0
+  flyway:
+    locations: classpath:db/migration # 迁移脚本的位置
+    baseline-on-migrate: true # 在没有元数据表的情况下，针对非空Schema执行迁移时是否自动调用基线
+    enabled: true
+    sql-migration-prefix: V
+    sql-migration-suffixes: .sql
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启SQL语句打印
