@@ -47,7 +47,7 @@
 
     </dependencies>
     <build>
-        <finalName>lims-sys</finalName>
+        <finalName>lims-sys-manage</finalName>
         <plugins>
 
             <plugin>
