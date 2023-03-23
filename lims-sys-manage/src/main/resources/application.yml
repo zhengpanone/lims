@@ -1,6 +1,9 @@
 spring:
   profiles:
     active: dev # 指定profile
-
-
+  application:
+    name: lims-sys-manage
+server:
+  servlet:
+    context-path: /sys
 

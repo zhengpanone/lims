@@ -1,6 +1,7 @@
 package com.zp.sys.controller;
 
 
+import com.zp.base.controller.BaseController;
 import com.zp.response.R;
 import com.zp.sys.controller.dto.LoginDTO;
 import com.zp.sys.controller.dto.RegisterDTO;
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 @Slf4j
-public class UserController {
+public class UserController extends BaseController {
     private final ISysUserService sysUserService;
 
     @ApiOperation(value = "用户注册")

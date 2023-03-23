@@ -5,9 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zp.base.entity.BaseEntity;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 /**
@@ -18,6 +18,9 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Builder
 @TableName("sys_i18n")
+@ApiModel
+@NoArgsConstructor
+@AllArgsConstructor
 public class SysI18nEntity extends BaseEntity {
 
     @TableId(value = "i18n_id", type = IdType.ASSIGN_ID)
@@ -28,14 +31,16 @@ public class SysI18nEntity extends BaseEntity {
      * 2.数据字典
      * 3.其它:系统界面上的一些元素
      */
+    @ApiModelProperty(value = "模块类型")
     private Integer moduleType;
     /**
      * 语言类型
      */
+    @ApiModelProperty(value = "语言类型")
     private String langType;
-
+    @ApiModelProperty(value = "国际化key")
     private String key;
-
+    @ApiModelProperty(value = "国际化value")
     private String value;
 
 }

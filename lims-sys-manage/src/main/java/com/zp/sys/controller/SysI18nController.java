@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(tags = "数据字典")
+@Api(tags = "国际化")
 @RequestMapping("/i18n")
 @RequiredArgsConstructor
 public class SysI18nController extends BaseController {
     private final ISysI18nService sysI18nService;
 
-    @ApiOperation(value = "分页查看数据字典")
+    @ApiOperation(value = "分页查看国际化数据")
     @PostMapping("/queryI18nPage")
     public R<PageResult<SysI18nEntity>> queryI18nPage(SysI18nEntity i18nEntity) {
         Page<SysI18nEntity> page = getPage();
