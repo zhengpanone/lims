@@ -34,11 +34,6 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>net.jodah</groupId>
-            <artifactId>expiringmap</artifactId>
-            <version>0.5.10</version>
-        </dependency>
         <!--新版本连接池lettuce-->
         <dependency>
             <groupId>org.apache.commons</groupId>

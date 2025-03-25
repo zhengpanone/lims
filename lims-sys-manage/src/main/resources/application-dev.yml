@@ -10,9 +10,10 @@ spring:
     password: root
 
   redis:
-    host: 192.168.18.215
+    host: 127.0.0.1
     port: 6379
     database: 0
+  # flyway
   flyway:
     locations: classpath:db/migration # 迁移脚本的位置
     baseline-on-migrate: true # 在没有元数据表的情况下，针对非空Schema执行迁移时是否自动调用基线
@@ -31,3 +32,4 @@ springfox:
     swagger:
       v2:
         enabled: true
+

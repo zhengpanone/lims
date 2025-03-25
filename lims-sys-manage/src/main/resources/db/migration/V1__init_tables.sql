@@ -7,14 +7,16 @@ create table sys_i18n
     `key`       varchar(255) null,
     value       varchar(255) null
 );
+drop table if exists sys_role;
 
-/*ALTER TABLE sys_user_role ADD create_user varchar(255) NULL;
-ALTER TABLE sys_user_role ADD create_time datetime NULL;
-ALTER TABLE sys_user_role ADD update_user varchar(255) NULL;
-ALTER TABLE sys_user_role ADD update_time datetime NULL;
-alter table sys_user_role modify create_user varchar(255) null comment '创建人';
-alter table sys_user_role modify create_time datetime null comment '创建时间';
-alter table sys_user_role modify update_user varchar(255) null comment  '更新人';
-alter table sys_user_role modify update_time datetime null comment  '更新时间';*/
+create table sys_role
+(
+    id           varchar(32)  not null,
+    create_user  varchar(255) not null comment '创建人',
+    created_time timestamp    not null default now() comment '创建时间',
+    update_user  varchar(255)  null comment '更新人',
+    update_time timestamp    not null default now() comment '更新时间'
+
+);
 
 
