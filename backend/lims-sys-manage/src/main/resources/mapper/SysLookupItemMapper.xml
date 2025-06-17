@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zp.lims.sys.mapper.SysLookupItemMapper">
+    <select id="queryPage" resultType="com.zp.lims.sys.entity.SysLookupItemEntity">
+        select * from sys_lookup_item sli
+        <where>
+            <if test="lookupItem.classifyId != null">
+                and sli.classify_id = #{lookupItem.classifyId}
+            </if>
+            <if test="lookupItem.code != null and lookupItem.code != ''">
+                and sli.code like concat('%', #{lookupItem.code}, '%')
+            </if>
+            <if test="lookupItem.name != null and lookupItem.name != ''">
+                and sli.name like concat('%', #{lookupItem.name}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>

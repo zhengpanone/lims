@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zp.lims.sys.mapper.SysLookupClassifyMapper">
+    <select id="queryPage" resultType="com.zp.lims.sys.entity.SysLookupClassifyEntity">
+        select * from sys_lookup_classify slc
+        <where>
+            <if test="classify.code != null and classify.code != ''">
+                and slc.code like concat('%', #{classify.code}, '%')
+            </if>
+            <if test="classify.name != null and classify.name != ''">
+                and slc.name like concat('%', #{classify.name}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>

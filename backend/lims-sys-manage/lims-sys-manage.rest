@@ -1,0 +1,572 @@
+### LIMS系统管理模块 API 测试文件
+### 基础URL: http://localhost:8081/sys
+
+### ==================== 认证模块 ====================
+
+### 1. 用户注册
+POST http://localhost:8081/sys/auth/register
+Content-Type: application/json
+
+{
+  "userName": "testuser",
+  "password": "123456",
+  "email": "test@example.com",
+  "nickName": "测试用户",
+  "note": "测试备注"
+}
+
+### 2. 用户登录
+POST http://localhost:8081/sys/auth/login
+Content-Type: application/json
+
+{
+  "account": "testuser",
+  "pwd": "123456",
+  "imgCode": "1234"
+}
+
+### 3. 刷新令牌
+POST http://localhost:8081/sys/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "your-refresh-token"
+}
+
+### 4. 用户登出
+POST http://localhost:8081/sys/auth/logout
+
+### ==================== 用户管理 ====================
+
+### 5. 分页查询用户
+GET http://localhost:8081/sys/user/page?current=1&size=10&userName=test
+
+### 6. 获取所有用户
+GET http://localhost:8081/sys/user/list
+
+### 7. 根据ID查询用户
+GET http://localhost:8081/sys/user/1
+
+### 8. 新增用户
+POST http://localhost:8081/sys/user
+Content-Type: application/json
+
+{
+  "userName": "admin",
+  "password": "123456",
+  "email": "admin@example.com",
+  "phone": "13800138000",
+  "role": [1, 2]
+}
+
+### 9. 更新用户
+PUT http://localhost:8081/sys/user
+Content-Type: application/json
+
+{
+  "id": 1,
+  "userName": "testuser",
+  "email": "test@example.com",
+  "phone": "13800138000",
+  "status": 1
+}
+
+### 10. 删除用户
+DELETE http://localhost:8081/sys/user/1
+
+### 11. 检查用户名是否存在
+GET http://localhost:8081/sys/user/check-username/testuser
+
+### 12. 检查邮箱是否存在
+GET http://localhost:8081/sys/user/check-email/test@example.com
+
+### ==================== 组织管理 ====================
+
+### 13. 分页查询组织
+GET http://localhost:8081/sys/org/page?current=1&size=10&name=测试
+
+### 14. 获取组织树
+GET http://localhost:8081/sys/org/tree
+
+### 15. 根据ID查询组织
+GET http://localhost:8081/sys/org/1
+
+### 16. 新增组织
+POST http://localhost:8081/sys/org
+Content-Type: application/json
+
+{
+  "name": "测试组织",
+  "parentId": 0,
+  "orgCode": "TEST001",
+  "level": 1
+}
+
+### 17. 更新组织
+PUT http://localhost:8081/sys/org
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "测试组织",
+  "parentId": 0,
+  "orgCode": "TEST001",
+  "level": 1
+}
+
+### 18. 删除组织
+DELETE http://localhost:8081/sys/org/1
+
+### 19. 根据父级ID查询子组织
+GET http://localhost:8081/sys/org/children/0
+
+### ==================== 职位管理 ====================
+
+### 20. 分页查询职位
+GET http://localhost:8081/sys/position/page?current=1&size=10&name=经理
+
+### 21. 获取所有职位
+GET http://localhost:8081/sys/position/list
+
+### 22. 根据ID查询职位
+GET http://localhost:8081/sys/position/1
+
+### 23. 新增职位
+POST http://localhost:8081/sys/position
+Content-Type: application/json
+
+{
+  "name": "项目经理",
+  "code": "PM001",
+  "description": "负责项目管理工作"
+}
+
+### 24. 更新职位
+PUT http://localhost:8081/sys/position
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "项目经理",
+  "code": "PM001",
+  "description": "负责项目管理工作"
+}
+
+### 25. 删除职位
+DELETE http://localhost:8081/sys/position/1
+
+### ==================== 权限管理 ====================
+
+### 26. 分页查询权限
+GET http://localhost:8081/sys/permission/page?current=1&size=10&name=用户
+
+### 27. 获取权限树
+GET http://localhost:8081/sys/permission/tree
+
+### 28. 根据角色ID查询权限
+GET http://localhost:8081/sys/permission/role/1
+
+### 29. 根据用户ID查询权限
+GET http://localhost:8081/sys/permission/user/1
+
+### 30. 根据ID查询权限
+GET http://localhost:8081/sys/permission/1
+
+### 31. 新增权限
+POST http://localhost:8081/sys/permission
+Content-Type: application/json
+
+{
+  "name": "用户管理",
+  "code": "user:manage",
+  "type": "menu",
+  "path": "/user",
+  "method": "GET",
+  "parentId": 0,
+  "sort": 1,
+  "description": "用户管理权限"
+}
+
+### 32. 更新权限
+PUT http://localhost:8081/sys/permission
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "用户管理",
+  "code": "user:manage",
+  "type": "menu",
+  "path": "/user",
+  "method": "GET",
+  "parentId": 0,
+  "sort": 1,
+  "description": "用户管理权限"
+}
+
+### 33. 删除权限
+DELETE http://localhost:8081/sys/permission/1
+
+### ==================== 用户组管理 ====================
+
+### 34. 分页查询用户组
+GET http://localhost:8081/sys/userGroup/page?current=1&size=10&name=开发
+
+### 35. 获取所有用户组
+GET http://localhost:8081/sys/userGroup/list
+
+### 36. 根据ID查询用户组
+GET http://localhost:8081/sys/userGroup/1
+
+### 37. 新增用户组
+POST http://localhost:8081/sys/userGroup
+Content-Type: application/json
+
+{
+  "name": "开发组"
+}
+
+### 38. 更新用户组
+PUT http://localhost:8081/sys/userGroup
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "开发组"
+}
+
+### 39. 删除用户组
+DELETE http://localhost:8081/sys/userGroup/1
+
+### ==================== 用户岗位管理 ====================
+
+### 40. 根据用户ID查询岗位
+GET http://localhost:8081/sys/userPost/user/1
+
+### 41. 根据岗位ID查询用户
+GET http://localhost:8081/sys/userPost/post/1
+
+### 42. 为用户分配岗位
+POST http://localhost:8081/sys/userPost/assign/1
+Content-Type: application/json
+
+[1, 2, 3]
+
+### 43. 删除用户岗位关联
+DELETE http://localhost:8081/sys/userPost/1
+
+### ==================== 用户职位管理 ====================
+
+### 44. 根据用户ID查询职位
+GET http://localhost:8081/sys/userPosition/user/1
+
+### 45. 根据职位ID查询用户
+GET http://localhost:8081/sys/userPosition/position/1
+
+### 46. 为用户分配职位
+POST http://localhost:8081/sys/userPosition/assign/1
+Content-Type: application/json
+
+[1, 2]
+
+### 47. 删除用户职位关联
+DELETE http://localhost:8081/sys/userPosition/1
+
+### ==================== 用户组角色管理 ====================
+
+### 48. 根据用户组ID查询角色
+GET http://localhost:8081/sys/userGroupRole/userGroup/1
+
+### 49. 根据角色ID查询用户组
+GET http://localhost:8081/sys/userGroupRole/role/1
+
+### 50. 为用户组分配角色
+POST http://localhost:8081/sys/userGroupRole/assign/1
+Content-Type: application/json
+
+[1, 2, 3]
+
+### 51. 删除用户组角色关联
+DELETE http://localhost:8081/sys/userGroupRole/1
+
+### ==================== 角色互斥管理 ====================
+
+### 52. 根据角色ID查询互斥角色
+GET http://localhost:8081/sys/roleMutex/role/1
+
+### 53. 检查两个角色是否互斥
+GET http://localhost:8081/sys/roleMutex/check?roleId1=1&roleId2=2
+
+### 54. 新增角色互斥关系
+POST http://localhost:8081/sys/roleMutex
+Content-Type: application/json
+
+{
+  "roleId": 1,
+  "mutexRoleId": 2
+}
+
+### 55. 删除角色互斥关系
+DELETE http://localhost:8081/sys/roleMutex/1
+
+### ==================== 组织角色管理 ====================
+
+### 56. 根据组织ID查询角色
+GET http://localhost:8081/sys/orgRole/org/1
+
+### 57. 根据角色ID查询组织
+GET http://localhost:8081/sys/orgRole/role/1
+
+### 58. 为组织分配角色
+POST http://localhost:8081/sys/orgRole/assign/1
+Content-Type: application/json
+
+[1, 2, 3]
+
+### 59. 删除组织角色关联
+DELETE http://localhost:8081/sys/orgRole/1
+
+### ==================== 职位角色管理 ====================
+
+### 60. 根据职位ID查询角色
+GET http://localhost:8081/sys/positionRole/position/1
+
+### 61. 根据角色ID查询职位
+GET http://localhost:8081/sys/positionRole/role/1
+
+### 62. 为职位分配角色
+POST http://localhost:8081/sys/positionRole/assign/1
+Content-Type: application/json
+
+[1, 2]
+
+### 63. 删除职位角色关联
+DELETE http://localhost:8081/sys/positionRole/1
+
+### ==================== 用户用户组管理 ====================
+
+### 64. 根据用户ID查询用户组
+GET http://localhost:8081/sys/userUserGroup/user/1
+
+### 65. 根据用户组ID查询用户
+GET http://localhost:8081/sys/userUserGroup/userGroup/1
+
+### 66. 为用户分配用户组
+POST http://localhost:8081/sys/userUserGroup/assign/1
+Content-Type: application/json
+
+[1, 2]
+
+### 67. 删除用户用户组关联
+DELETE http://localhost:8081/sys/userUserGroup/1
+
+### ==================== 用户组织管理 ====================
+
+### 68. 根据用户ID查询组织
+GET http://localhost:8081/sys/userOrg/user/1
+
+### 69. 根据组织ID查询用户
+GET http://localhost:8081/sys/userOrg/org/1
+
+### 70. 为用户分配组织
+POST http://localhost:8081/sys/userOrg/assign/1
+Content-Type: application/json
+
+[1, 2]
+
+### 71. 删除用户组织关联
+DELETE http://localhost:8081/sys/userOrg/1
+
+### ==================== 验证码相关 ====================
+
+### 72. 获取验证码
+GET http://localhost:8081/sys/captcha/get
+
+### 73. 验证验证码
+POST http://localhost:8081/sys/captcha/check
+Content-Type: application/json
+
+{
+  "captchaVerification": "验证码验证字符串"
+}
+
+### ==================== 国际化相关 ====================
+
+### 74. 分页查询国际化信息
+GET http://localhost:8081/sys/i18n/page?current=1&size=10&language=zh_CN
+
+### 75. 根据ID查询国际化信息
+GET http://localhost:8081/sys/i18n/1
+
+### 76. 新增国际化信息
+POST http://localhost:8081/sys/i18n
+Content-Type: application/json
+
+{
+  "language": "zh_CN",
+  "key": "user.login",
+  "value": "用户登录"
+}
+
+### 77. 更新国际化信息
+PUT http://localhost:8081/sys/i18n
+Content-Type: application/json
+
+{
+  "id": 1,
+  "language": "zh_CN",
+  "key": "user.login",
+  "value": "用户登录"
+}
+
+### 78. 删除国际化信息
+DELETE http://localhost:8081/sys/i18n/1
+
+### ==================== 数据字典相关 ====================
+
+### 79. 分页查询数据字典分类
+GET http://localhost:8081/sys/lookupClassify/page?current=1&size=10&name=状态
+
+### 80. 根据ID查询数据字典分类
+GET http://localhost:8081/sys/lookupClassify/1
+
+### 81. 新增数据字典分类
+POST http://localhost:8081/sys/lookupClassify
+Content-Type: application/json
+
+{
+  "name": "用户状态",
+  "code": "user_status",
+  "description": "用户状态分类"
+}
+
+### 82. 更新数据字典分类
+PUT http://localhost:8081/sys/lookupClassify
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "用户状态",
+  "code": "user_status",
+  "description": "用户状态分类"
+}
+
+### 83. 删除数据字典分类
+DELETE http://localhost:8081/sys/lookupClassify/1
+
+### 84. 分页查询数据字典项
+GET http://localhost:8081/sys/lookupItem/page?current=1&size=10&classifyId=1
+
+### 85. 根据ID查询数据字典项
+GET http://localhost:8081/sys/lookupItem/1
+
+### 86. 新增数据字典项
+POST http://localhost:8081/sys/lookupItem
+Content-Type: application/json
+
+{
+  "classifyId": 1,
+  "name": "启用",
+  "value": "1",
+  "sort": 1,
+  "description": "用户启用状态"
+}
+
+### 87. 更新数据字典项
+PUT http://localhost:8081/sys/lookupItem
+Content-Type: application/json
+
+{
+  "id": 1,
+  "classifyId": 1,
+  "name": "启用",
+  "value": "1",
+  "sort": 1,
+  "description": "用户启用状态"
+}
+
+### 88. 删除数据字典项
+DELETE http://localhost:8081/sys/lookupItem/1
+
+### ==================== 菜单管理 ====================
+
+### 89. 获取菜单列表
+GET http://localhost:8081/sys/menu/list
+
+### 90. 根据ID查询菜单
+GET http://localhost:8081/sys/menu/1
+
+### 91. 新增菜单
+POST http://localhost:8081/sys/menu
+Content-Type: application/json
+
+{
+  "menuId": "user_manage",
+  "parentId": "0",
+  "parentName": "根目录",
+  "icon": "user",
+  "name": "用户管理",
+  "url": "/user",
+  "perms": "user:list",
+  "menuIndex": 1,
+  "menuType": 1
+}
+
+### 92. 更新菜单
+PUT http://localhost:8081/sys/menu
+Content-Type: application/json
+
+{
+  "menuId": "user_manage",
+  "parentId": "0",
+  "parentName": "根目录",
+  "icon": "user",
+  "name": "用户管理",
+  "url": "/user",
+  "perms": "user:list",
+  "menuIndex": 1,
+  "menuType": 1
+}
+
+### 93. 删除菜单
+DELETE http://localhost:8081/sys/menu/user_manage
+
+### ==================== 角色管理 ====================
+
+### 94. 分页查询角色
+GET http://localhost:8081/sys/role/page?current=1&size=10&name=管理员
+
+### 95. 获取所有角色
+GET http://localhost:8081/sys/role/list
+
+### 96. 根据ID查询角色
+GET http://localhost:8081/sys/role/1
+
+### 97. 新增角色
+POST http://localhost:8081/sys/role
+Content-Type: application/json
+
+{
+  "name": "系统管理员",
+  "code": "ADMIN",
+  "description": "系统管理员角色"
+}
+
+### 98. 更新角色
+PUT http://localhost:8081/sys/role
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "系统管理员",
+  "code": "ADMIN",
+  "description": "系统管理员角色"
+}
+
+### 99. 删除角色
+DELETE http://localhost:8081/sys/role/1
+
+### ==================== 令牌管理 ====================
+
+### 100. 获取令牌信息
+GET http://localhost:8081/sys/token/info
+Authorization: Bearer your-access-token 

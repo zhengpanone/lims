@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zp.sys.mapper.SysI18nMapper">
-    <select id="queryI18nPage" resultType="com.zp.sys.entity.SysI18nEntity">
-        select i18n_id,key,language_type,value from sys_i18n si where si.key=#{i18n.key}
-    </select>
-</mapper>

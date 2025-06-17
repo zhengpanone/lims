@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zp.lims.sys.mapper.SysI18nMapper">
+    <select id="queryPage" resultType="com.zp.lims.sys.entity.SysI18nEntity">
+        select * from sys_i18n si
+        <where>
+            <if test="i18n.code != null and i18n.code != ''">
+                and si.code like concat('%', #{i18n.code}, '%')
+            </if>
+            <if test="i18n.language != null and i18n.language != ''">
+                and si.language = #{i18n.language}
+            </if>
+            <if test="i18n.content != null and i18n.content != ''">
+                and si.content like concat('%', #{i18n.content}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>
