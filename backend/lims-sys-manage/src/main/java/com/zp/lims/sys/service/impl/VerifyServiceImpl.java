@@ -1,8 +1,8 @@
 package com.zp.lims.sys.service.impl;
 
-import com.zp.lims.RedisUtils;
 import com.zp.lims.common.exception.BusinessException;
 import com.zp.lims.common.core.response.R;
+import com.zp.lims.common.utils.RedisUtils;
 import com.zp.lims.sys.service.VerifyService;
 import com.zp.lims.util.CaptchaVerifyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@ public class VerifyServiceImpl implements VerifyService {
         // 清除之前缓存订单图片验证码
         if (!String.valueOf(request.getSession().getAttribute("SESSION_VERIFY_CODE_" + sessionId)).isEmpty()) {
             String getVerify = String.valueOf(request.getSession().getAttribute("SESSION_VERIFY_CODE_" + sessionId));
-            redisUtils.del(getVerify);
+            redisUtils.delete(getVerify);
         }
         // 生成图片验证码
         Object[] verify = CaptchaVerifyUtil.newBuilder().build().createImage();
@@ -75,7 +75,7 @@ public class VerifyServiceImpl implements VerifyService {
         if (!redisUtils.hasKey(verificationCode.toUpperCase())) {
             throw new BusinessException("验证码错误");
         }
-        redisUtils.del(verificationCode);
+        redisUtils.delete(verificationCode);
         return R.success();
     }
 }

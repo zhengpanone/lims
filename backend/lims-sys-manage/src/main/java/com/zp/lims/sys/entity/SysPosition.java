@@ -9,8 +9,9 @@ import lombok.Data;
 @Data
 @TableName("sys_position")
 public class SysPosition {
+
     @TableId(type = IdType.AUTO)
-    private Long id;
+    private String id;
 
     private String name;
 

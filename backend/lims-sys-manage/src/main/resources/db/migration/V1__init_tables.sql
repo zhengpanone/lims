@@ -1,17 +1,23 @@
 -- 用户表，存储系统用户基本信息
 DROP TABLE IF EXISTS sys_user;
-CREATE TABLE sys_user
+create table sys_user
 (
-    id          BIGINT PRIMARY KEY COMMENT '用户ID，主键',
-    username    VARCHAR(64)  NOT NULL COMMENT '登录用户名，唯一',
-    password    VARCHAR(128) NOT NULL COMMENT '密码（加密存储）',
-    nickname    VARCHAR(64) COMMENT '用户昵称',
-    email       VARCHAR(128) COMMENT '电子邮箱',
-    phone       VARCHAR(20) COMMENT '联系电话',
-    status      TINYINT  DEFAULT 1 COMMENT '用户状态，1=启用，0=禁用',
-    create_time DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
-) COMMENT ='系统用户表';
+    id          varchar(50)                        not null comment '用户ID，主键'
+        primary key,
+    username    varchar(64)                        not null comment '登录用户名，唯一',
+    password    varchar(128)                       not null comment '密码（加密存储）',
+    nickname    varchar(64)                        null comment '用户昵称',
+    email       varchar(128)                       null comment '电子邮箱',
+    phone       varchar(20)                        null comment '联系电话',
+    status      tinyint  default 1                 null comment '用户状态，1=启用，0=禁用',
+    deleted     tinyint  default 0                 not null comment '0=未删除，1=已删除',
+    create_time datetime default CURRENT_TIMESTAMP null comment '创建时间',
+    create_user varchar(50)                        null,
+    update_time datetime default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP comment '更新时间',
+    update_user varchar(50)                        null
+)
+    comment '系统用户表';
+
 
 -- 组织表（树形结构），支持多级组织架构
 DROP TABLE IF EXISTS sys_org;

@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.zp.lims.common.core.entity.BaseEntity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = false)
 @Data
 @TableName("m_sample")
 public class SampleEntity extends BaseEntity {
@@ -18,3 +20,5 @@ public class SampleEntity extends BaseEntity {
      */
     private String sampleCode;
 }
+
+

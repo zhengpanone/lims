@@ -3,20 +3,35 @@ package com.zp.lims.sys.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zp.lims.sys.entity.SysUser;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * SysUser
  *
  * @author zhengpanone
+ * @description: 用户Mapper接口
  * @since 2022-11-28
- * @description: 用户表数据访问层
  */
 //@Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {
     /**
-     * 判断是否存在用户
+     * 检查用户名是否存在
+     *
      * @param userName
      * @return
      */
-    Integer existUserName(@Param("userName") String userName);
+    int existsByUsername(@Param("userName") String userName);
+
+    /**
+     * 根据用户名查询用户
+     */
+    @Select("SELECT * FROM sys_user WHERE username = #{username} AND deleted = 0")
+    SysUser findByUsername(@Param("username") String username);
+
+    /**
+     * 根据用户名更新用户状态
+     */
+    @Update("UPDATE sys_user SET status = #{status}, update_time = NOW() WHERE username = #{username} AND deleted = 0")
+    int updateStatusByUsername(@Param("username") String username, @Param("status") Integer status);
 }

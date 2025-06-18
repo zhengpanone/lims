@@ -1,6 +1,7 @@
 package com.zp.lims.sys.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -12,6 +13,6 @@ public class SysUserOrg {
     @TableId(value = "user_id", type = IdType.INPUT)
     private Long userId;
 
-    @TableId(value = "org_id", type = IdType.INPUT)
+    @TableField(value = "org_id")
     private Long orgId;
 }

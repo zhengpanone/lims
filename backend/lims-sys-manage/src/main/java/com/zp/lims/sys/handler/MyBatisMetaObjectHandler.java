@@ -18,8 +18,8 @@ import java.util.Objects;
 @Slf4j
 @Component
 public class MyBatisMetaObjectHandler implements MetaObjectHandler {
-    private final  String createTime = "createTime";
-    private final  String createUser = "createUser";
+    private final String createTime = "createTime";
+    private final String createUser = "createUser";
     private final String updateTime = "updateTime";
 
     @Override
@@ -31,9 +31,10 @@ public class MyBatisMetaObjectHandler implements MetaObjectHandler {
                 if (Objects.isNull(entity.getCreateTime())) {
                     entity.setCreateTime(LocalDateTime.now());
                 }
-                if (null == getFieldValByName(createUser, metaObject)) {
-                    this.setFieldValByName(createUser, "", metaObject);
+                if (Objects.isNull(entity.getUpdateTime())) {
+                    entity.setUpdateTime(LocalDateTime.now());
                 }
+                strictInsertFill(metaObject, "deleted", Integer.class, 0);
 
             } else {
                 LocalDateTime localDateTime = LocalDateTime.now();
@@ -51,7 +52,7 @@ public class MyBatisMetaObjectHandler implements MetaObjectHandler {
     public void updateFill(MetaObject metaObject) {
         log.info("start update fill...");
         try {
-            if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof BaseEntity ) {
+            if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof BaseEntity) {
                 BaseEntity entity = (BaseEntity) metaObject.getOriginalObject();
                 entity.setUpdateTime(LocalDateTime.now());
 

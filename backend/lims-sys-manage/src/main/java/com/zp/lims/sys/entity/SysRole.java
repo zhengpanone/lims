@@ -25,8 +25,7 @@ public class SysRole extends BaseEntity {
      * 角色ID
      */
     @TableId
-    @TableField("id")
-    private Long id;
+    private String id;
     /**
      * 角色名称
      */

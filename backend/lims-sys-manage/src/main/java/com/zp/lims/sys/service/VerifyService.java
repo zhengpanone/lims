@@ -19,7 +19,7 @@ public interface VerifyService {
      * @param request
      * @param response
      */
-    void createCode(HttpServletRequest request, HttpServletResponse response)throws IOException;
+    void createCode(HttpServletRequest request, HttpServletResponse response) throws IOException;
 
     /**
      * 检查图片验证码

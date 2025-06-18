@@ -80,23 +80,27 @@ public class R<T> implements Serializable {
         return new R<>(CommonResponseEnum.SUCCESS.getCode(), CommonResponseEnum.SUCCESS.getMessage(), data);
     }
 
-    public static R<?> failed() {
+    public static <T> R<T> success(String message, T data) {
+        return new R<>(CommonResponseEnum.SUCCESS.getCode(), message, data);
+    }
+
+    public static <T> R<T> error() {
         return new R<>(CommonResponseEnum.COMMON_FAILED.getCode(), CommonResponseEnum.COMMON_FAILED.getMessage());
     }
 
-    public static R<?> failed(String message) {
+    public static <T> R<T> error(String message) {
         return new R<>(CommonResponseEnum.FAILED.getCode(), message);
     }
 
-    public static R<?> failed(CommonResponseEnum commonResponseEnum, String message) {
+    public static <T> R<T> error(CommonResponseEnum commonResponseEnum, String message) {
         return new R<>(commonResponseEnum.getCode(), message);
     }
 
-    public static R<?> failed(int code, String message) {
+    public static <T> R<T> error(int code, String message) {
         return new R<>(code, message, null);
     }
 
-    public static R<?> failed(IResult errorResult) {
+    public static <T> R<T> error(IResult errorResult) {
         return new R<>(errorResult.getCode(), errorResult.getMessage());
     }
 

@@ -1,9 +1,17 @@
-### LIMS系统管理模块 API 测试文件
-### 基础URL: http://localhost:8081/sys
+## LIMS系统管理模块 API 测试文件
+## 基础URL: http://localhost:8081/sys
+## ==================== 认证模块 ====================
 
-### ==================== 认证模块 ====================
+### 1. 获取验证码
+//blockPuzzle、default、clickWord
+POST http://localhost:8081/sys/captcha/get
+Content-Type: application/json
 
-### 1. 用户注册
+{
+  "captchaType": "blockPuzzle"
+}
+
+### 2. 用户注册
 POST http://localhost:8081/sys/auth/register
 Content-Type: application/json
 
@@ -15,7 +23,7 @@ Content-Type: application/json
   "note": "测试备注"
 }
 
-### 2. 用户登录
+### 3. 用户登录
 POST http://localhost:8081/sys/auth/login
 Content-Type: application/json
 
@@ -25,18 +33,27 @@ Content-Type: application/json
   "imgCode": "1234"
 }
 
-### 3. 刷新令牌
+### 4. 刷新令牌
 POST http://localhost:8081/sys/auth/refresh
 Content-Type: application/json
+Authorization: Bearer {{access_token}}
 
 {
-  "refreshToken": "your-refresh-token"
+  "refreshToken": {{refresh_token}}
 }
 
 ### 4. 用户登出
 POST http://localhost:8081/sys/auth/logout
+Content-Type: application/json
 
-### ==================== 用户管理 ====================
+
+### 5. 注销所有设备
+POST http://localhost:8080/sys/auth/logout-all
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+
+## ==================== 用户管理 ====================
 
 ### 5. 分页查询用户
 GET http://localhost:8081/sys/user/page?current=1&size=10&userName=test

@@ -9,7 +9,7 @@ server:
 
 # JWT配置
 jwt:
-  secret: lims-jwt-secret-key-2024
+  secret: Ym/eamJ2Lra0K9n9Lp3y6OiI/zulREeNrKUFTG6oo/LeXg9ZbbWVVpiu+QFiTqqBpo0+MQ9uxaFjWuIQgCMmVA==
   accessTokenExpiration: 86400000  # 24小时
   refreshTokenExpiration: 604800000  # 7天
 
@@ -27,3 +27,7 @@ aj:
     aes-status: true
     # 滑动干扰项(0/1/2)
     interference-options: 2
+
+logging:
+  level:
+    org.springframework.security: debug

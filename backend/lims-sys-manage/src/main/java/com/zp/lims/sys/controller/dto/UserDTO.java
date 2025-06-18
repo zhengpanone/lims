@@ -15,26 +15,26 @@ import java.util.List;
  */
 @Data
 @ApiModel("新增修改用户校验类")
-public class UserDTO{
+public class UserDTO {
     @ApiModelProperty("用户名称")
     private String userName;
     /**
      * 角色ID
      */
     @ApiModelProperty("角色ID集合")
-    private List<Long> role;
+    private List<String> roleIds;
     /**
      * 部门ID
      */
     @NotEmpty(message = "部门不能为空")
     @ApiModelProperty("部门ID")
-    private Long deptId;
+    private String deptId;
 
     /**
      * 岗位ID
      */
     @ApiModelProperty("岗位ID集合")
-    private List<Long> post;
+    private List<String> post;
 
     /**
      * 新密码

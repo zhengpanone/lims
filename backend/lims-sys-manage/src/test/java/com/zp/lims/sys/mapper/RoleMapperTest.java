@@ -31,7 +31,7 @@ public class RoleMapperTest {
 
     @Test
     public void testInsert() {
-        SysRole role = SysRole.builder().id(1L).name("管理员").build();
+        SysRole role = SysRole.builder().id("1").name("管理员").build();
         int insert = roleMapper.insert(role);
         log.info("是否插入成功={}", insert == 1);
 

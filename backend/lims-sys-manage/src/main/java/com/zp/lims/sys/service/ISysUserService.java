@@ -8,22 +8,20 @@ import com.zp.lims.sys.controller.vo.LoginResponseVO;
 import com.zp.lims.sys.entity.SysUser;
 
 /**
- * RoleService
- *
  * @author zhengpanone
  * @since 2022-11-28
  * @description: 用户服务接口
  */
 public interface ISysUserService extends IService<SysUser> {
+
+    SysUser findByUsername(String username);
+
+    boolean existsByUsername(String username);
+
+    boolean updateStatusByUsername(String username, Integer status);
+
+
     Boolean saveUser(UserDTO userDTO);
 
-    /**
-     * 注册功能
-     */
-    SysUser register(RegisterDTO registerDTO);
 
-    /**
-     * 登录功能
-     */
-    LoginResponseVO login(LoginDTO loginDTO);
 }

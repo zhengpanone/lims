@@ -1,4 +1,7 @@
 package com.zp.lims.sys.service;
 
-public interface ISysMenuService {
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.zp.lims.sys.entity.SysMenu;
+
+public interface ISysMenuService extends IService<SysMenu> {
 }

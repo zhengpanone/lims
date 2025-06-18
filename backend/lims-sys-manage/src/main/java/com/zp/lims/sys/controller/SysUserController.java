@@ -2,8 +2,8 @@ package com.zp.lims.sys.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zp.lims.base.controller.BaseController;
-import com.zp.lims.response.R;
+import com.zp.lims.common.core.controller.BaseController;
+import com.zp.lims.common.core.response.R;
 import com.zp.lims.sys.controller.dto.UserDTO;
 import com.zp.lims.sys.entity.SysUser;
 import com.zp.lims.sys.service.ISysUserService;
@@ -29,7 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class SysUserController extends BaseController {
-    
+
     private final ISysUserService sysUserService;
 
     @ApiOperation("分页查询用户")
@@ -39,13 +39,13 @@ public class SysUserController extends BaseController {
             @ApiParam("每页大小") @RequestParam(defaultValue = "10") Integer size,
             @ApiParam("用户名") @RequestParam(required = false) String userName,
             @ApiParam("邮箱") @RequestParam(required = false) String email) {
-        
+
         Page<SysUser> page = new Page<>(current, size);
         LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
         wrapper.like(userName != null, SysUser::getUserName, userName)
                 .like(email != null, SysUser::getEmail, email)
                 .orderByDesc(SysUser::getCreateTime);
-        
+
         Page<SysUser> result = sysUserService.page(page, wrapper);
         return R.success(result);
     }
@@ -66,13 +66,13 @@ public class SysUserController extends BaseController {
 
     @ApiOperation("新增用户")
     @PostMapping
-    public R<Boolean> save(@Validated @RequestBody UserDTO userDTO) {
+    public R<?> save(@Validated @RequestBody UserDTO userDTO) {
         try {
             Boolean result = sysUserService.saveUser(userDTO);
             return R.success(result);
         } catch (Exception e) {
             log.error("新增用户失败", e);
-            return R.failed(e.getMessage());
+            return R.error(e.getMessage());
         }
     }
 

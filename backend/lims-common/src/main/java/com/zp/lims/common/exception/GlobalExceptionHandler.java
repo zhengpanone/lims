@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
     @ExceptionHandler({Exception.class})
     public R<?> handle(Exception e) {
-        return R.failed(e.getMessage());
+        return R.error(e.getMessage());
     }
 
     /**
@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler({BusinessException.class})
     public R<?> handleBusinessException(BusinessException ex) {
-        return R.failed(ex.getMessage());
+        return R.error(ex.getMessage());
     }
 
     /**
@@ -43,7 +43,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler({ForbiddenException.class})
     public R<?> handleForbiddenException(ForbiddenException ex) {
-        return R.failed(CommonResponseEnum.FORBIDDEN);
+        return R.error(CommonResponseEnum.FORBIDDEN);
     }
 
     /**
@@ -56,7 +56,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = ConstraintViolationException.class)
     public R<?> constraintViolationExceptionHandler(ConstraintViolationException e) {
         String message = e.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining());
-        return R.failed(20000, "ConstraintViolationException，输入数据异常" + message);
+        return R.error(20000, "ConstraintViolationException，输入数据异常" + message);
     }
 
 
@@ -99,7 +99,7 @@ public class GlobalExceptionHandler {
             }
             msg.append(error.getDefaultMessage() == null ? "" : error.getDefaultMessage());
         }
-        return R.failed(ArgumentResponseEnum.VALID_ERROR.getCode(), msg.substring(1));
+        return R.error(ArgumentResponseEnum.VALID_ERROR.getCode(), msg.substring(1));
     }
 
 }

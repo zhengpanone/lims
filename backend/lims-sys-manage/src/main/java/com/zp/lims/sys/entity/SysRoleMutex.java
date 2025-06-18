@@ -1,6 +1,7 @@
 package com.zp.lims.sys.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -12,6 +13,6 @@ public class SysRoleMutex {
     @TableId(value = "role_id", type = IdType.INPUT)
     private Long roleId;
 
-    @TableId(value = "mutex_role_id", type = IdType.INPUT)
+    @TableField(value = "mutex_role_id")
     private Long mutexRoleId;
 }

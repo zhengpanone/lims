@@ -2,6 +2,7 @@ package com.zp.lims.common.core.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -29,8 +30,9 @@ public class BaseEntity implements Serializable {
     /**
      * 删除：0、正常， 1、代删除
      */
-    @TableField(fill = FieldFill.INSERT)
-    private Integer delFlag;
+    @TableField(fill = FieldFill.INSERT,value = "deleted")
+    @TableLogic(value = "0",delval = "1")
+    private Integer deleted;
 
     /**
      * 创建时间
