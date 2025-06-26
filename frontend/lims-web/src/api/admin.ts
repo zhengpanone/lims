@@ -2,18 +2,7 @@ import request from '@/utils/request'
 import { Admin, AdminPostData, IListParams } from './types/admin'
 import { IDict, IResponseData } from './types/common'
 
-export const getAdmins = (params: IListParams) => {
-  return request<
-    IResponseData<{
-      total: number
-      list: Admin[]
-    }>
-  >({
-    method: 'GET',
-    url: '/api/setting/admin',
-    params: params,
-  })
-}
+
 /**
  * 创建管理员
  * @param data

@@ -2,11 +2,11 @@ import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
-import { useUserStore } from '@/store/auth'
+import { useUserStore, useAccessStore } from '@/store/auth'
 
 import router from '@/router/'
 
-import { refreshToken } from '@/api/user'
+import { refreshToken } from '@/api/auth'
 import { BUSINESS_CODE, TOKEN_EXPIRES_BUFFER } from './constants'
 // import eventEmiter from './eventEmiter'
 // 创建实例
@@ -20,18 +20,18 @@ let refreshPromise: Promise<any> | null = null
 // 请求拦截器
 request.interceptors.request.use(
   async (config: AxiosRequestConfig & InternalAxiosRequestConfig) => {
-      try {
-          const userStore = useUserStore();
-          const user = userStore.$state.userInfo
-          if(user && config.headers){
-            config.headers.Authorization = `Bearer ${user.token}`
-          }
-      } catch (error) {
-        // 刷新失败，清除认证信息并跳转到登录页
-        router.push('/login')
-        return Promise.reject(error)
+    try {
+      const accessStore = useAccessStore();
+      const access = accessStore.$state.accessToken
+      if (access && config.headers) {
+        config.headers.Authorization = `Bearer ${access}`
       }
-    
+    } catch (error) {
+      // 刷新失败，清除认证信息并跳转到登录页
+      router.push('/login')
+      return Promise.reject(error)
+    }
+
     return config
   },
   (error: AxiosError) => {
@@ -50,7 +50,7 @@ request.interceptors.response.use(
       // 正确情况
       return response
     }
-    
+
     // 登录过期
     if (status === BUSINESS_CODE.TOKEN_EXPIRED) {
       return handleTokenExpired(response)

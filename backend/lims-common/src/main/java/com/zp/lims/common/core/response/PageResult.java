@@ -30,6 +30,4 @@ public class PageResult <T> implements Serializable {
     public static <T>PageResult<T> pageResult(IPage<T> pageInfo){
         return new PageResult<>(pageInfo.getTotal(),pageInfo.getRecords());
     }
-
-
 }

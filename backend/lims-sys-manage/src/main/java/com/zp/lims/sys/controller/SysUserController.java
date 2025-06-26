@@ -3,6 +3,7 @@ package com.zp.lims.sys.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zp.lims.common.core.controller.BaseController;
+import com.zp.lims.common.core.response.PageResult;
 import com.zp.lims.common.core.response.R;
 import com.zp.lims.sys.controller.dto.UserDTO;
 import com.zp.lims.sys.entity.SysUser;
@@ -34,7 +35,7 @@ public class SysUserController extends BaseController {
 
     @ApiOperation("分页查询用户")
     @GetMapping("/page")
-    public R<Page<SysUser>> page(
+    public R<PageResult<SysUser>> page(
             @ApiParam("页码") @RequestParam(defaultValue = "1") Integer current,
             @ApiParam("每页大小") @RequestParam(defaultValue = "10") Integer size,
             @ApiParam("用户名") @RequestParam(required = false) String userName,
@@ -47,7 +48,8 @@ public class SysUserController extends BaseController {
                 .orderByDesc(SysUser::getCreateTime);
 
         Page<SysUser> result = sysUserService.page(page, wrapper);
-        return R.success(result);
+
+        return R.success(PageResult.pageResult(result));
     }
 
     @ApiOperation("获取所有用户")

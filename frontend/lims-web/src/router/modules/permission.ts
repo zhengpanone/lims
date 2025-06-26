@@ -9,9 +9,9 @@ const routes: RouteRecordRaw = {
   },
   children: [
     {
-      path: 'admin',
-      name: 'admin',
-      component: () => import('@/views/permission/admin/index.vue'),
+      path: 'user',
+      name: 'user',
+      component: () => import('@/views/permission/user/index.vue'),
       meta: {
         // 自定义元数据
         title: '管理员',
