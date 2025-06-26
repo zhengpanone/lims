@@ -32,6 +32,6 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
     /**
      * 根据用户名更新用户状态
      */
-    @Update("UPDATE sys_user SET status = #{status}, update_time = NOW() WHERE username = #{username} AND deleted = 0")
-    int updateStatusByUsername(@Param("username") String username, @Param("status") Integer status);
+    @Update("UPDATE sys_user SET status = #{status}, update_time = NOW() WHERE id = #{id} AND deleted = 0")
+    int updateStatusById(@Param("id") String id, @Param("status") Integer status);
 }

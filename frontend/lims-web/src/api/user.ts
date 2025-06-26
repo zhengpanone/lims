@@ -21,3 +21,20 @@ export const getUserList = (params: IListPageParams) => {
     params: params,
   })
 }
+
+/**
+ * 更新用户状态
+ * @param id 用户ID
+ * @param status 用户状态 0:禁用 1:启用
+ * @returns
+ */
+export const updateUserStatus = (id: string, status: number) => {
+  return request<IResponseData<null>>({
+    method: 'PUT',
+    url: `/sys/user/updateState`,
+    data: {
+      id,
+      status
+    }
+  })
+}

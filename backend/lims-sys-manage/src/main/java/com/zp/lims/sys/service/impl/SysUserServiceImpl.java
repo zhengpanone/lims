@@ -42,8 +42,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public boolean updateStatusByUsername(String username, Integer status) {
-        return baseMapper.updateStatusByUsername(username, status) > 0;
+    public boolean updateStatusById(String id, Integer status) {
+        return baseMapper.updateStatusById(id, status) > 0;
     }
 
     /**

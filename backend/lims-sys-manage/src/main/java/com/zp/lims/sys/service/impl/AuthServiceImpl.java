@@ -46,7 +46,7 @@ public class AuthServiceImpl implements IAuthService {
     public SysUser register(RegisterDTO registerDTO) {
         // 查询用户是否存在
         LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(SysUser::getUserName, registerDTO.getUserName());
+        wrapper.eq(SysUser::getUsername, registerDTO.getUserName());
         SysUser existUser = sysUserService.getOne(wrapper);
         if (existUser != null) {
             throw new RuntimeException("用户名已存在");

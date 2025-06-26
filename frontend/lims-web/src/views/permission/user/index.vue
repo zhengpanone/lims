@@ -39,7 +39,7 @@
       <el-table style="width: 100%" :data="list" v-loading="listLoading">
         <el-table-column prop="id" label="ID" width="180" />
         <el-table-column prop="realName" label="姓名" />
-        <el-table-column prop="account" label="账号" width="180" />
+        <el-table-column prop="username" label="账号" width="180" />
         <el-table-column label="状态" width="180">
           <template #default="scope">
             <el-switch
@@ -92,8 +92,8 @@
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted } from "vue";
-import { deleteAdmin, updateAdminStatus } from "@/api/admin";
-import { getUserList } from "@/api/user";
+import { deleteAdmin } from "@/api/admin";
+import { getUserList, updateUserStatus } from "@/api/user";
 import type { IListPageParams, User } from "@/api/types/user";
 import AdminForm from "./AdminForm.vue";
 import { ElMessage } from "element-plus";
@@ -125,7 +125,7 @@ const handleQuery = async () => {
 };
 const handleStatusChange = async (item: User) => {
   item.statusLoading = true;
-  await updateAdminStatus(item.id, item.status).finally(() => {
+  await updateUserStatus(item.id, item.status).finally(() => {
     item.statusLoading = false;
   });
   ElMessage.success(`${item.status === 1 ? "启用" : "禁用"}成功`);

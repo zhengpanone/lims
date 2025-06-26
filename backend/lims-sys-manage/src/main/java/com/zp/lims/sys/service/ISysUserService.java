@@ -18,7 +18,7 @@ public interface ISysUserService extends IService<SysUser> {
 
     boolean existsByUsername(String username);
 
-    boolean updateStatusByUsername(String username, Integer status);
+    boolean updateStatusById(String username, Integer status);
 
 
     Boolean saveUser(UserDTO userDTO);

@@ -6,6 +6,7 @@ import com.zp.lims.common.core.controller.BaseController;
 import com.zp.lims.common.core.response.PageResult;
 import com.zp.lims.common.core.response.R;
 import com.zp.lims.sys.controller.dto.UserDTO;
+import com.zp.lims.sys.controller.dto.UserUpdateDTO;
 import com.zp.lims.sys.entity.SysUser;
 import com.zp.lims.sys.service.ISysUserService;
 import io.swagger.annotations.Api;
@@ -43,13 +44,22 @@ public class SysUserController extends BaseController {
 
         Page<SysUser> page = new Page<>(current, size);
         LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
-        wrapper.like(userName != null, SysUser::getUserName, userName)
+        wrapper.like(userName != null, SysUser::getUsername, userName)
                 .like(email != null, SysUser::getEmail, email)
                 .orderByDesc(SysUser::getCreateTime);
 
         Page<SysUser> result = sysUserService.page(page, wrapper);
 
         return R.success(PageResult.pageResult(result));
+    }
+
+    @ApiOperation("更新用户状态")
+    @PutMapping("/updateState")
+    public R<Boolean> updateUserState(@Validated @RequestBody UserUpdateDTO updateDTO) {
+        String id = updateDTO.getId();
+        Integer status = updateDTO.getStatus();
+        boolean result = sysUserService.updateStatusById(id,status);
+        return R.success(result);
     }
 
     @ApiOperation("获取所有用户")
@@ -96,7 +106,7 @@ public class SysUserController extends BaseController {
     @GetMapping("/check-username/{userName}")
     public R<Boolean> checkUsername(@ApiParam("用户名") @PathVariable String userName) {
         LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(SysUser::getUserName, userName);
+        wrapper.eq(SysUser::getUsername, userName);
         boolean exists = sysUserService.count(wrapper) > 0;
         return R.success(exists);
     }
