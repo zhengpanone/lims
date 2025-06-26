@@ -2,34 +2,34 @@ import { defineStore } from 'pinia'
 
 type AccessToken = null | string;
 
-interface BasicUserInfo{
-  [key:string]:any;
+interface BasicUserInfo {
+  [key: string]: any;
   /**
    * 用户名
    */
-  username:string;
+  username: string;
   /**
    * 用户角色
    */
-  roles?:string[];
+  roles?: string[];
   /**
    * 头像
    */
-  avatar?:string;
+  avatar?: string;
 }
 
-interface AccessState{
-    /**
-   * 登录 accessToken
-   */
-    accessToken: AccessToken;
+interface AccessState {
+  /**
+ * 登录 accessToken
+ */
+  accessToken: AccessToken;
 }
 
-interface UserState{
+interface UserState {
   /**
    * 用户信息
    */
-  userInfo: BasicUserInfo| null;
+  userInfo: BasicUserInfo | null;
   /**
    * 用户角色
    */
@@ -53,20 +53,38 @@ export const useUserStore = defineStore('user', {
       const roles = userInfo?.roles || [];
       this.setUserRoles(roles);
     },
-    setUserRoles(roles: string[]){
-      this.userRoles=roles;
+    setUserRoles(roles: string[]) {
+      this.userRoles = roles;
     },
   },
+  persist: {
+    strategies: [
+      {
+        key: 'user-store',
+        storage: localStorage,
+        paths: ['userInfo', 'userRoles']
+      }
+    ]
+  }
 });
 
-export const useAccessStore = defineStore('access',{
-  actions:{
-    setAccessToken(token: AccessToken){
+export const useAccessStore = defineStore('access', {
+  actions: {
+    setAccessToken(token: AccessToken) {
       this.accessToken = token;
     }
   },
-  state:():AccessState=>({
+  state: (): AccessState => ({
     accessToken: null,
   }),
+  persist: {
+    strategies: [
+      {
+        key: 'access-store',
+        storage: localStorage,
+        paths: ['accessToken']
+      }
+    ]
+  }
 
 });

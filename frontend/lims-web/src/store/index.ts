@@ -1,5 +1,6 @@
 import type { Pinia } from 'pinia';
 import { defineStore, createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import type { App } from 'vue';
 import { IUserInfo } from '@/api/types/common'
 import { setItem, getItem } from '@/utils/storage'
@@ -14,10 +15,11 @@ export interface InitStoreOptions {
   namespace: string;
 }
 
-export async function initStores(app: App, options?: InitStoreOptions){
+export async function initStores(app: App, options?: InitStoreOptions) {
   // 创建pinia
-  piniaStore = createPinia()
-  app.use(piniaStore)
+  piniaStore = createPinia();
+  piniaStore.use(piniaPluginPersistedstate);
+  app.use(piniaStore);
   return piniaStore
 }
 
@@ -44,4 +46,14 @@ export const useIndexStore = defineStore('index', {
   },
 
   getters: {},
+  persist: {
+    strategies: [
+      {
+        key: 'index-store',
+        storage: localStorage,
+        paths: ['isCollapse']
+      }
+    ]
+  }
+
 })
