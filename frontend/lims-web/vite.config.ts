@@ -21,7 +21,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.join(__dirname, 'src'),
-      'vue-i18n':'vue-i18n/dist/vue-i18n.cjs.js'
+      'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js'
     },
   },
   css: {
@@ -45,15 +45,20 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ''), // 路径重写
       },
     },*/
-  }, 
-  build:{
-     // 设置最终构建的浏览器兼容目标
-     target: 'es2015',
-     // 构建后是否生成 source map 文件
-     sourcemap: false,
-     //  chunk 大小警告的限制（以 kbs 为单位）
-     chunkSizeWarningLimit: 2000,
-     // 启用/禁用 gzip 压缩大小报告
-     reportCompressedSize: false,
+  },
+  build: {
+    // 设置最终构建的浏览器兼容目标
+    target: 'es2015',
+    // 构建后是否生成 source map 文件
+    sourcemap: true,
+    //  chunk 大小警告的限制（以 kbs 为单位）
+    chunkSizeWarningLimit: 2000,
+    // 启用/禁用 gzip 压缩大小报告
+    reportCompressedSize: false,
+  },
+  define: {
+    __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false, // 关闭 hydration mismatch 日志
+    __VUE_OPTIONS_API__: true,                      // 如果你使用了 Options API
+    __VUE_PROD_DEVTOOLS__: true                    // 生产环境关闭 devtools
   }
 })

@@ -69,7 +69,7 @@
 import { ref, reactive, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { ElMessage } from "element-plus";
-import { login } from "@/api/user";
+import { login } from "@/api/auth";
 import { getCaptcha } from "@/api/common";
 import { useUserStore, useAccessStore } from "@/store/auth";
 // import {useIndexStore as indexStore} from '@/store'

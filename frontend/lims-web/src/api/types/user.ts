@@ -26,7 +26,7 @@ export interface User {
 }
 
 export interface UserPostData {
-  account: string
+  username: string
   pwd: string
   confPwd: string
   roles: number[]

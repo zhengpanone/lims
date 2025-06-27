@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zp.lims.common.core.entity.BaseEntity;
 
+import com.zp.lims.common.enums.StatusEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -44,6 +45,6 @@ public class SysUser extends BaseEntity {
      */
     private String email;
 
-    private Integer status;
+    private StatusEnum status;
 
 }

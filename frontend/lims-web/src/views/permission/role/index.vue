@@ -32,14 +32,14 @@
       <template #header>
         <div class="card-header">
           <el-button type="primary" @click="formVisible = true"
-            >添加管理员</el-button
+            >添加角色</el-button
           >
         </div>
       </template>
       <el-table style="width: 100%" :data="list" v-loading="listLoading">
         <el-table-column prop="id" label="ID" width="180" />
-        <el-table-column prop="realName" label="姓名" />
-        <el-table-column prop="username" label="账号" width="180" />
+        <el-table-column prop="code" label="角色code" width="180" />
+        <el-table-column prop="name" label="角色名称" />
         <el-table-column label="状态" width="180">
           <template #default="scope">
             <el-switch
@@ -84,7 +84,7 @@
       />
     </el-card>
   </el-col>
-  <AdminForm
+  <RoleForm
     v-model="formVisible"
     v-model:admin-id="adminId"
     @success="handleSuccess"
@@ -92,25 +92,26 @@
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted } from "vue";
-import { getUserList, updateUserStatus, deleteUser } from "@/api/user";
-import type { IListPageParams, User } from "@/api/types/user";
-import AdminForm from "./UserForm.vue";
+import { getRoleList, updateRoleStatus, deleteRole } from "@/api/role";
+import type { IListPageParams, Role } from "@/api/types/role";
+import RoleForm from "./RoleForm.vue";
 import { ElMessage } from "element-plus";
-const list = ref<User[]>([]); // 列表数据
+const list = ref<Role[]>([]); // 列表数据
 const listCount = ref(0);
 const listLoading = ref(true);
 const listParams = reactive({
   page: 1,
-  limit: 1,
+  limit: 10,
   name: "",
   roles: "",
   status: "" as IListPageParams["status"],
 });
 const formVisible = ref(false);
 const adminId = ref<string | null>(null);
+
 const loadList = async () => {
   listLoading.value = true;
-  const data = await getUserList(listParams).finally(() => {
+  const data = await getRoleList(listParams).finally(() => {
     listLoading.value = false;
   });
   data.data.list.forEach((item) => {
@@ -119,30 +120,35 @@ const loadList = async () => {
   list.value = data.data.list;
   listCount.value = data.data.total;
 };
+
 const handleQuery = async () => {
   await loadList();
 };
-const handleStatusChange = async (item: User) => {
+
+const handleStatusChange = async (item: Role) => {
   item.statusLoading = true;
-  await updateUserStatus(item.id, item.status).finally(() => {
+  await updateRoleStatus(item.id, item.status).finally(() => {
     item.statusLoading = false;
   });
   ElMessage.success(`${item.status === 1 ? "启用" : "禁用"}成功`);
 };
 
 const handleDelete = async (id: string) => {
-  await deleteUser(id);
+  await deleteRole(id);
   ElMessage.success(`删除成功`);
   loadList();
 };
+
 const handleUpdate = (id: string) => {
   adminId.value = id;
   formVisible.value = true;
 };
+
 const handleSuccess = () => {
   formVisible.value = false;
   loadList();
 };
+
 onMounted(() => {
   loadList();
 });

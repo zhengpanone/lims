@@ -2,6 +2,7 @@ package com.zp.lims.sys.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.zp.lims.common.constant.SecurityConst;
+import com.zp.lims.common.enums.StatusEnum;
 import com.zp.lims.sys.config.JwtTokenProvider;
 import com.zp.lims.sys.controller.dto.LoginDTO;
 import com.zp.lims.sys.controller.dto.RefreshTokenDTO;
@@ -66,7 +67,7 @@ public class AuthServiceImpl implements IAuthService {
         // 密码加密
         sysUser.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         // 设置默认状态为激活
-        sysUser.setStatus(1);
+        sysUser.setStatus(StatusEnum.ACTIVE);
 
         sysUserService.save(sysUser);
         return sysUser;

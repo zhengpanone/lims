@@ -14,7 +14,16 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/permission/user/index.vue'),
       meta: {
         // 自定义元数据
-        title: '管理员',
+        title: '用户管理',
+      },
+    },
+    {
+      path: 'role',
+      name: 'role',
+      component: () => import('@/views/permission/role/index.vue'),
+      meta: {
+        // 自定义元数据
+        title: '角色管理',
       },
     },
   ],

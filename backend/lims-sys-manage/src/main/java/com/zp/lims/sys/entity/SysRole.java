@@ -5,8 +5,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zp.lims.common.core.entity.BaseEntity;
 import com.zp.lims.common.enums.StatusEnum;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 
 /**
@@ -17,6 +20,9 @@ import lombok.experimental.SuperBuilder;
  */
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Accessors(chain = true)
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 @TableName("sys_role")

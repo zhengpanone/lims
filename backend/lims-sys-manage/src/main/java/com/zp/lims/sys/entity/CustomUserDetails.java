@@ -32,7 +32,7 @@ public class CustomUserDetails implements UserDetails {
 
     public static CustomUserDetails create(SysUser user) {
         List<SimpleGrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE" +/*user.getRole(*/""));
-        return new CustomUserDetails(user.getUsername(), user.getPassword(), user.getStatus(), authorities);
+        return new CustomUserDetails(user.getUsername(), user.getPassword(), user.getStatus().getValue(), authorities);
 
     }
 
