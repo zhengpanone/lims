@@ -27,7 +27,7 @@ export const createRole = (data: RolePostData) => {
 export const updateRole = (id: string, data: RoleUpdateData) => {
   return request<IResponseData<null>>({
     method: 'POST',
-    url: `/sys/role/update/`,
+    url: `/sys/role/update`,
     data: { id: id, ...data },
   })
 }
@@ -35,7 +35,7 @@ export const updateRole = (id: string, data: RoleUpdateData) => {
 export const getRole = (id: string) => {
   return request<IResponseData<Role>>({
     method: 'GET',
-    url: `/sys/role/:${id}`,
+    url: `/sys/role/${id}`,
   })
 }
 

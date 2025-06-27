@@ -40,7 +40,7 @@ export const updateUser = (id: string, data: UserPostData) => {
 export const getUser = (id: string) => {
   return request<IResponseData<User>>({
     method: 'GET',
-    url: `/sys/user/:${id}`,
+    url: `/sys/user/${id}`,
   })
 }
 

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zp.lims.common.core.response.PageResult;
 import com.zp.lims.common.core.response.R;
 import com.zp.lims.sys.controller.dto.RoleDTO;
+import com.zp.lims.sys.controller.dto.RolePageDTO;
 import com.zp.lims.sys.controller.dto.UserUpdateDTO;
 import com.zp.lims.sys.controller.vo.RoleVO;
 import com.zp.lims.sys.entity.SysRole;
@@ -37,10 +38,10 @@ public class SysRoleController {
 
 
     @GetMapping("/page")
-    public R<PageResult<RoleVO>> getAdmins(RoleDTO roleDTO) {
-        Page<SysRole> page = new Page<>(roleDTO.getPage(), roleDTO.getLimit());
+    public R<PageResult<RoleVO>> getAdmins(RolePageDTO rolePageDTO) {
+        Page<SysRole> page = new Page<>(rolePageDTO.getPage(), rolePageDTO.getLimit());
         LambdaQueryWrapper<SysRole> wrapper = new LambdaQueryWrapper<SysRole>().
-                like(StringUtils.isNotEmpty(roleDTO.getName()), SysRole::getName, roleDTO.getName());
+                like(StringUtils.isNotEmpty(rolePageDTO.getName()), SysRole::getName, rolePageDTO.getName());
         IPage result = roleService.page(page, wrapper);
         return R.success(PageResult.pageResult(result));
     }

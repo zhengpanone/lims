@@ -2,6 +2,7 @@ package com.zp.lims.common.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.baomidou.mybatisplus.annotation.IEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -11,12 +12,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @author zhengpanone
  * @since 2022-11-28
  */
-@JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum  StatusEnum implements IEnum<Integer> {
+
+
+public enum StatusEnum implements IEnum<Integer> {
     //启用
-    ACTIVE(1,"启用"),
+    ACTIVE(1, "启用"),
     // 禁用
-    DISABLED(0,"禁用");
+    DISABLED(0, "禁用");
     /**
      * 编码
      */
@@ -26,7 +28,7 @@ public enum  StatusEnum implements IEnum<Integer> {
     /**
      * 名称
      */
-    private final  String name;
+    private final String name;
 
     StatusEnum(Integer code, String name) {
         this.code = code;
@@ -38,7 +40,21 @@ public enum  StatusEnum implements IEnum<Integer> {
         return code;
     }
 
+    public Integer getCode() {
+        return code;
+    }
+
     public String getName() {
         return name;
+    }
+
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
+    public static StatusEnum of(Integer code) {
+        for (StatusEnum status : values()) {
+            if (status.code.equals(code)) {
+                return status;
+            }
+        }
+        return null;
     }
 }

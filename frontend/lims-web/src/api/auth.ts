@@ -32,6 +32,9 @@ export const logout = (data: IRefreshTokenDTO) => {
   return request<IResponseData<null>>({
     url: '/sys/auth/logout',
     method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + data.refreshToken,
+    },
     data
   })
 }

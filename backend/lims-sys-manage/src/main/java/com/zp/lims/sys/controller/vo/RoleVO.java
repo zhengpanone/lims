@@ -1,5 +1,6 @@
 package com.zp.lims.sys.controller.vo;
 
+import com.zp.lims.common.enums.StatusEnum;
 import lombok.Data;
 
 /**
@@ -12,5 +13,5 @@ import lombok.Data;
 public class RoleVO {
     String id;
     String roleName;
-    Integer status;
+    StatusEnum status;
 }

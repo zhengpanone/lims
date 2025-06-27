@@ -35,7 +35,8 @@ public class Swagger2Config {
             .enable(swaggerEnabled)
             .groupName("lims")
             .apiInfo(apiInfo()).select()
-            .apis(RequestHandlerSelectors.withClassAnnotation(Api.class)) // 加上Api注解的类自动生成接口文档
+            // 加上Api注解的类自动生成接口文档
+            .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
             .paths(PathSelectors.any())
             .build();
     }

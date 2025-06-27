@@ -86,7 +86,7 @@
   </el-col>
   <RoleForm
     v-model="formVisible"
-    v-model:admin-id="adminId"
+    v-model:role-id="roleId"
     @success="handleSuccess"
   />
 </template>
@@ -107,7 +107,7 @@ const listParams = reactive({
   status: "" as IListPageParams["status"],
 });
 const formVisible = ref(false);
-const adminId = ref<string | null>(null);
+const roleId = ref<string | null>(null);
 
 const loadList = async () => {
   listLoading.value = true;
@@ -140,7 +140,7 @@ const handleDelete = async (id: string) => {
 };
 
 const handleUpdate = (id: string) => {
-  adminId.value = id;
+  roleId.value = id;
   formVisible.value = true;
 };
 

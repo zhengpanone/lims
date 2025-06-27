@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = false)
 @Data
-public class RoleDTO {
+public class RolePageDTO extends PageDTO {
     String name;
     StatusEnum status;
 

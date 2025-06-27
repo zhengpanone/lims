@@ -111,6 +111,7 @@ async function handleTokenExpired(response: any) {
 
 export default <T = any>(config: AxiosRequestConfig) => {
   return request(config).then((res) => {
+    console.log("-----" + res)
     return res.data as T
   })
 }

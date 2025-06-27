@@ -9,7 +9,9 @@ export interface IListPageParams {
 export interface Role {
   id: string
   name: string
+  code: string
   status: number
+  description?: string
   is_del: number
   _add_time: string
   _last_time: string
@@ -18,6 +20,8 @@ export interface Role {
 
 export interface RolePostData {
   name: string
+  code: string
+  description?: string
   status: 0 | 1
 
 }

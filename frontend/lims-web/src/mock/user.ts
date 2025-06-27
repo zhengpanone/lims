@@ -33,7 +33,7 @@ export default [
     },
     // 退出登录
     {
-        url: "/api/user/logout",
+        url: "/sys/user/logout",
         method: "post",
         response: (res: any) => {
             return {
