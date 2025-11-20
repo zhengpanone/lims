@@ -4,7 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.zp.lims</groupId>
-    <artifactId>backend</artifactId>
+    <artifactId>lims-manage</artifactId>
+    <name>lims-manage</name>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <description>父工程项目</description>
@@ -12,9 +13,9 @@
 
     <!--系统模板 -->
     <modules>
-        <module>lims-sys-manage</module>
-        <module>lims-utils</module>
         <module>lims-common</module>
+        <module>lims-utils</module>
+        <module>lims-sys-manage</module>
         <module>lims-sample-manage</module>
     </modules>
     <!--版本说明 -->
